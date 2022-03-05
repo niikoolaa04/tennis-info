@@ -12,7 +12,7 @@ function FooterComponent() {
               <p className='text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti animi obcaecati, eligendi facere quisquam dolor!</p>
             </div>
             <div className='col-lg-4 mt-4 mt-lg-0 text-center text-lg-start mx-auto'>
-              <h3 className='text-white'>Socials</h3>
+              <h3 className='text-white'>Social</h3>
               <div className='mx-auto mx-lg-0 border-bottom border-secondary mb-3' style={{ width: "8rem" }} />
               <ul className='text-white list-unstyled text-center text-lg-start'>
                 <li className='align-middle py-1'>

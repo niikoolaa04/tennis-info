@@ -1,16 +1,19 @@
 import React from 'react'
 import NavComponent from '../Navigation/NavComponent'
 import FooterComponent from '../Other/FooterComponent'
+import 'aos'
+import './animateImage.css'
 
 function HomeComponent() {
   return (
     <div>
-      <NavComponent />
+      <NavComponent active={"home"} />
       <div>
+        {/* GENERAL INFORMATION */}
         <div className="container">
           <div className="row">
             <div className='mt-5 text-center'>
-              <img src="https://cdn-icons-png.flaticon.com/128/502/502142.png" alt="TennisInfo" />
+              <img className='tennisIcon' src="https://cdn-icons-png.flaticon.com/128/502/502142.png" alt="TennisInfo" />
               <h1 className='text-center font-weight-bold mt-4'>Tennis Info</h1>
               <div className='mt-4'>
                 <p className='mb-0'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, quos.</p>
@@ -19,10 +22,10 @@ function HomeComponent() {
             </div>
           </div>
         </div>
+        {/* TOP 10 PLAYERS SECTION */}
         <div className='pb-3 mt-5' style={{ backgroundColor: "#f0f0f0" }}>
           <div className='container'>
             <div className="row">
-            {/* TOP 10 PLAYERS SECTION */}
               <div className='mt-5'>
                 <h3 className='text-center'>Top 10 Players</h3>
                 <table className="table table-hover mt-5">
@@ -101,12 +104,13 @@ function HomeComponent() {
             </div>
           </div>
         </div>
+        {/* TOP STATISTICS */}
         <div className='container'>
           <div className="row">
             <div className="mt-5">
               <h3 className="text-center">Top Statistics</h3>
               <div class="card-group">
-                <div className="card mt-4 mr-sm-2 mr-md-5">
+                <div data-aos="fade-right" className="card mt-4 mr-sm-2 mr-md-5">
                   <img src="https://i0.wp.com/shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png?resize=1024%2C683&ssl=1" className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h5 className="card-title">Number #1 Player</h5>
@@ -114,7 +118,7 @@ function HomeComponent() {
                     <a href="#" className="btn btn-primary">View Player</a>
                   </div>
                 </div>
-                <div className="card mt-4 mr-sm-2 mr-md-5">
+                <div data-aos="fade-right" className="card mt-4 mr-sm-2 mr-md-5">
                   <img src="https://i0.wp.com/shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png?resize=1024%2C683&ssl=1" className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h5 className="card-title">GOAT</h5>
@@ -122,7 +126,7 @@ function HomeComponent() {
                     <a href="#" className="btn btn-primary">View Player</a>
                   </div>
                 </div>
-                <div className="card mt-4">
+                <div data-aos="fade-right" className="card mt-4">
                   <img src="https://i0.wp.com/shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png?resize=1024%2C683&ssl=1" className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h5 className="card-title">Latest Tournament</h5>

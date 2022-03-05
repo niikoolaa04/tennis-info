@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-function NavComponent() {
+function NavComponent({ active = "home" }) {
+
+  const isActive = (page) => {
+    if(active == page) return " active";
+    else return "";
+  }
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "#f0f0f0" }}>
@@ -14,16 +20,16 @@ function NavComponent() {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Home</a>
+                  <a className={"nav-link" + isActive("home")} href="#">Home</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Players</a>
+                  <a className={"nav-link" + isActive("players")} href="#">Players</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Tournaments</a>
+                  <a className={"nav-link" + isActive("tournaments")} href="#">Tournaments</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Leaderboards</a>
+                  <a className={"nav-link" + isActive("leaderboards")} href="#">Leaderboards</a>
                 </li>
               </ul>
               <form className="form-inline my-2 my-lg-0">

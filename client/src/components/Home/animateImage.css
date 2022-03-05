@@ -1,0 +1,15 @@
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-25px);
+  }
+}
+
+.tennisIcon {
+  display: flex;
+  position: relative;
+  margin: auto;
+  animation: bounce 2s linear infinite alternate;
+}

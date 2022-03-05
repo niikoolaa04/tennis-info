@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomeComponent from "./components/Home/HomeComponent";
 import PlayersComponent from "./components/Players/PlayersComponent";
+import InfoComponent from "./components/Players/InfoComponent";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeComponent />} />
         <Route path="/players" element={<PlayersComponent />} />
+        <Route path="/player/:playerId" element={<InfoComponent />} />
       </Routes>
     </BrowserRouter>
   </div>
