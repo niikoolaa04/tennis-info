@@ -1,36 +1,44 @@
 import React from 'react'
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function NavComponent() {
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container>
-        <Navbar.Brand href="#home">Tennis Info</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto list-unstyled">
-            <Nav.Link className="text-white">
-              <Link to={"/tournaments"}>Features</Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to={"/players"}>Players</Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to={"/tournaments"}>Leaderboards</Link>
-            </Nav.Link>
-          </Nav>
-          <Nav>
-            <Nav.Link href="#deets">Login</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Register
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div>
+      <nav class="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "#f0f0f0" }}>
+        <div className='container'>
+            <a className="navbar-brand" href="#">Navbar</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <a className="nav-link" href="#">Home</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">Players</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">Tournaments</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">Leaderboards</a>
+                </li>
+              </ul>
+              <form className="form-inline my-2 my-lg-0">
+                <div class="input-group mr-sm-2">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Player</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Search for Player" aria-label="Player" aria-describedby="basic-addon1" />
+                </div>
+                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
   )
 }
 
