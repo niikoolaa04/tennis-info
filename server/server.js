@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser")
 const auth = require("./routes/auth");
 const users = require("./routes/users");
+const fs = require("fs")
+const csv = require("csv-reader");
 
 app.use(cookieParser());
 app.use(express.json());
