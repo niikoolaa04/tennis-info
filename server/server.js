@@ -7,8 +7,25 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser")
 const auth = require("./routes/auth");
 const users = require("./routes/users");
-const fs = require("fs")
-const csv = require("csv-reader");
+const api = require("./routes/api");
+
+/* const results = [], rankings = [];
+
+fs.createReadStream('atp_rankings_current.csv')
+  .pipe(csv())
+  .on('data', (data) => {
+    rankings.push({
+      date: data.ranking_date,
+      rank: data.rank,
+      player: data.player,
+      points: data.points,
+    });
+  })
+  .on('end', async() => {
+    await RankingsSchema.insertMany(rankings, function(error, docs) {
+      console.log('done')
+    });
+  }); */
 
 app.use(cookieParser());
 app.use(express.json());
@@ -30,6 +47,7 @@ mongoose.connect(process.env.SERVER_MONGO_URL, {
   .catch((err) => console.log(err));
 
 app.use("/auth", auth);
+app.use("/api", api);
 app.use("/users", users);
 
 app.listen(process.env.SERVER_PORT, () => console.log(`Listenting on Port ${process.env.SERVER_PORT}.`));

@@ -1,2 +1,2 @@
-GET https://www.ultimatetennisstatistics.com/playerProfile?playerId=6029&tab=profile
-Content-Type: application/json
+GET http://localhost:3009/api/leaderboard
+limit: 20
