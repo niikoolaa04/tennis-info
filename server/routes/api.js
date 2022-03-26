@@ -14,8 +14,8 @@ router.use(cors({
 router.use(cookieParser());
 
 router.get("/leaderboard", async(req, res) => {
-  RankingsSchema.find({}, (err, post) => {
-    res.json(post.sort((a, b) => a.rank - b.rank)).status(200);
+  RankingsSchema.find({}, null, { sort: { rank: 1 } }, (err, post) => {
+    res.json(post).status(200);
   }).limit(req.headers.limit)
 });
 

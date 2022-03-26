@@ -18,7 +18,7 @@ function TournamentComponent() {
 
   return (
     <div>
-      <NavComponent active={"players"} />
+      <NavComponent active={"tournaments"} />
       <div>
         {/* GENERAL INFORMATION */}
         <div className="container">

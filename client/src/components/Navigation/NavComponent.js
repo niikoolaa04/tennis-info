@@ -20,16 +20,16 @@ function NavComponent({ active = "home" }) {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <a className={"nav-link" + isActive("home")} href="#">Home</a>
+                  <a className={"nav-link" + isActive("home")} href="/">Home</a>
                 </li>
                 <li className="nav-item">
-                  <a className={"nav-link" + isActive("players")} href="#">Players</a>
+                  <a className={"nav-link" + isActive("players")} href="/players">Players</a>
                 </li>
                 <li className="nav-item">
-                  <a className={"nav-link" + isActive("tournaments")} href="#">Tournaments</a>
+                  <a className={"nav-link" + isActive("tournaments")} href="/tournaments">Tournaments</a>
                 </li>
                 <li className="nav-item">
-                  <a className={"nav-link" + isActive("leaderboards")} href="#">Leaderboards</a>
+                  <a className={"nav-link" + isActive("soon")} href="#">Soon</a>
                 </li>
               </ul>
               <form className="form-inline my-2 my-lg-0">

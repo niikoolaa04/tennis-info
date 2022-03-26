@@ -1,3 +1,2 @@
-GET http://localhost:3009/api/tournaments
-page: 1,
-rows: 20
+GET http://localhost:3009/api/leaderboards
+limit: 20

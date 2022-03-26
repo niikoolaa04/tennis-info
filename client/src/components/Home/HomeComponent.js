@@ -61,6 +61,9 @@ function HomeComponent() {
               </div>
             </div>
           </div>
+          <div className="container my-2">
+            <a href="/players" className="btn btn-primary">View Leaderboard</a>
+          </div>
         </div>
         {/* TOP STATISTICS */}
         <div className='container'>
