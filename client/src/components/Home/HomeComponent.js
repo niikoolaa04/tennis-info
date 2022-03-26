@@ -1,10 +1,19 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import NavComponent from '../Navigation/NavComponent'
 import FooterComponent from '../Other/FooterComponent'
 import 'aos'
 import './animateImage.css'
+import { getLeaderboard } from '../../utils/utils'
 
 function HomeComponent() {
+  const [loading, setLoading] = useState(false);
+  const [players, setPlayers] = useState([]);
+  const limit = 10;
+  
+  useEffect(async() => {
+    await getLeaderboard(limit, setLoading, setPlayers)
+  }, [])
+
   return (
     <div>
       <NavComponent active={"home"} />
@@ -38,66 +47,15 @@ function HomeComponent() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>First Last</td>
-                      <td>USA</td>
-                      <td>10000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>First Last</td>
-                      <td>USA</td>
-                      <td>10000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>First Last</td>
-                      <td>USA</td>
-                      <td>10000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>First Last</td>
-                      <td>USA</td>
-                      <td>10000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">5</th>
-                      <td>First Last</td>
-                      <td>USA</td>
-                      <td>10000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">6</th>
-                      <td>First Last</td>
-                      <td>USA</td>
-                      <td>10000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">7</th>
-                      <td>First Last</td>
-                      <td>USA</td>
-                      <td>10000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">8</th>
-                      <td>First Last</td>
-                      <td>USA</td>
-                      <td>10000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">9</th>
-                      <td>First Last</td>
-                      <td>USA</td>
-                      <td>10000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">10</th>
-                      <td>First Last</td>
-                      <td>USA</td>
-                      <td>10000</td>
-                    </tr>
+                    {players.map((p, i) => (
+                      <tr>
+                        <th scope="row">{ p.rank }</th>
+                        <td>{ p.fullName }</td>
+                        <td>{ p.country }</td>
+                        <td>{ p.points }</td>
+                      </tr>
+                    ))
+                  }
                   </tbody>
                 </table>
               </div>

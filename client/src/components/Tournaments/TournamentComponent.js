@@ -1,15 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import NavComponent from '../Navigation/NavComponent'
 import FooterComponent from '../Other/FooterComponent'
-import PlayerList from './PlayerList'
+import TournamentList from './TournamentList'
 import SearchComponent from './SearchComponent'
+import { getTournaments, findTournament } from '../../utils/utils'
 
-function PlayersComponent() {
-  const [players, setPlayers] = useState([]);
+function TournamentComponent() {
+  const [tournaments, setTournaments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currPage, setCurrPage] = useState(1);
   const prevPage = () => currPage == 1 ? setCurrPage(currPage) : setCurrPage(currPage - 1);
   const nextPage = () => currPage == 100 ? setCurrPage(currPage) : setCurrPage(currPage + 1);
+
+  useEffect(async() => {
+    await getTournaments(currPage, 20, setLoading, setTournaments);
+  }, [])
 
   return (
     <div>
@@ -20,12 +25,12 @@ function PlayersComponent() {
           <div className="row">
             <div className='mt-5 text-center'>
               <img className='tennisIcon' src="https://cdn-icons-png.flaticon.com/128/2317/2317989.png" alt="PlayerInfo" />
-              <h1 className='text-center font-weight-bold mt-4'>Players List</h1>
+              <h1 className='text-center font-weight-bold mt-4'>Tournament List</h1>
             </div>
           </div>
         </div>
         {/* SEARCH FOR PLAYER FORM */}
-        <SearchComponent loading={loading} setLoading={setLoading} players={players} setPlayers={setPlayers} setCurrPage={setCurrPage} />
+        <SearchComponent loading={loading} setLoading={setLoading} tournaments={tournaments} setTournaments={setTournaments} setCurrPage={setCurrPage} />
         {/* PLAYER LIST TABLE */}
         <div className="container">
           <div className="row">
@@ -33,14 +38,14 @@ function PlayersComponent() {
               <table className="table table-sm table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Country</th>
-                    <th scope="col">Points</th>
+                    <th scope="col">Surface</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Top Player</th>
                   </tr>
                 </thead>
                 <tbody> 
-                  <PlayerList players={players} loading={loading} setLoading={setLoading} setPlayers={setPlayers} setCurrPage={setCurrPage} currPage={currPage} key={currPage + 1} />
+                  <TournamentList tournaments={tournaments} loading={loading} setLoading={setLoading} setTournaments={setTournaments} setCurrPage={setCurrPage} currPage={currPage} key={currPage + 1} />
                 </tbody>
               </table>
             </div>
@@ -74,4 +79,4 @@ function PlayersComponent() {
   )
 }
 
-export default PlayersComponent
+export default TournamentComponent
