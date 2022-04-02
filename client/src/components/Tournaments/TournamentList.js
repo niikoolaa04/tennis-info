@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { getTournaments } from '../../utils/utils';
 
-function PlayerList({ tournaments, setTournaments, currPage, setCurrPage, loading, setLoading }) {
+function TournamentList({ tournaments, setTournaments, currPage, setCurrPage, loading, setLoading, level = "" }) {
 
   useEffect(async() => {
-    await getTournaments(currPage, 20, setLoading, setTournaments);
+    await getTournaments(currPage, 20, setLoading, setTournaments, level);
   }, []);
 
   return tournaments.map((tour, i) => (
@@ -17,4 +17,4 @@ function PlayerList({ tournaments, setTournaments, currPage, setCurrPage, loadin
   ))
 }
 
-export default PlayerList
+export default TournamentList

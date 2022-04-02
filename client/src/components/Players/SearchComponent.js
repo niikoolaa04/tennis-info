@@ -9,7 +9,7 @@ function SearchComponent({ players, setPlayers, loading, setLoading }) {
     e.preventDefault();
     setLoading(true);
     if(search == '') return setPlayers([]);
-    await fetch(`http://localhost:3009/api/players/search`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/api/players/search`, {
       method: 'GET',
       headers: {
         search,

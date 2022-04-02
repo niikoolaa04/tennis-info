@@ -3,18 +3,24 @@ import NavComponent from '../Navigation/NavComponent'
 import FooterComponent from '../Other/FooterComponent'
 import TournamentList from './TournamentList'
 import SearchComponent from './SearchComponent'
-import { getTournaments, findTournament } from '../../utils/utils'
+import { getTournaments } from '../../utils/utils'
 
 function TournamentComponent() {
   const [tournaments, setTournaments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currPage, setCurrPage] = useState(1);
+  const [level, setLevel] = useState('');
   const prevPage = () => currPage == 1 ? setCurrPage(currPage) : setCurrPage(currPage - 1);
   const nextPage = () => currPage == 100 ? setCurrPage(currPage) : setCurrPage(currPage + 1);
 
+  const filterType = async(text) => {
+    setLevel(text);
+    await getTournaments(currPage, 20, setLoading, setTournaments, level);
+  }
+
   useEffect(async() => {
-    await getTournaments(currPage, 20, setLoading, setTournaments);
-  }, [])
+    await getTournaments(currPage, 20, setLoading, setTournaments, level);
+  }, []);
 
   return (
     <div>
@@ -30,8 +36,9 @@ function TournamentComponent() {
           </div>
         </div>
         {/* SEARCH FOR PLAYER FORM */}
-        <SearchComponent loading={loading} setLoading={setLoading} tournaments={tournaments} setTournaments={setTournaments} setCurrPage={setCurrPage} />
+        <SearchComponent loading={loading} setLoading={setLoading} tournaments={tournaments} setTournaments={setTournaments} setCurrPage={setCurrPage} filterType={filterType} />
         {/* PLAYER LIST TABLE */}
+        <div class="dropdown">
         <div className="container">
           <div className="row">
             <div className="mt-5">
@@ -45,12 +52,12 @@ function TournamentComponent() {
                   </tr>
                 </thead>
                 <tbody> 
-                  <TournamentList tournaments={tournaments} loading={loading} setLoading={setLoading} setTournaments={setTournaments} setCurrPage={setCurrPage} currPage={currPage} key={currPage + 1} />
+                  <TournamentList tournaments={tournaments} loading={loading} setLoading={setLoading} setTournaments={setTournaments} setCurrPage={setCurrPage} currPage={currPage} key={currPage + 1} level={level} />
                 </tbody>
               </table>
             </div>
             <div>
-              <nav aria-label="Page navigation example">
+              <nav>
                 <ul className="pagination">
                   { currPage > 1 ? <li className="page-item mr-2" onClick={(() => setCurrPage(1))}><a className="page-link" href="#">Beggining</a></li> : '' }
                   <li className="page-item" onClick={(() => prevPage())}><a className="page-link" href="#">Previous</a></li>
@@ -70,6 +77,7 @@ function TournamentComponent() {
                   <li className="page-item" onClick={(() => nextPage())}><a className="page-link" href="#">Next</a></li>
                 </ul>
               </nav>
+              </div>
             </div>
           </div>
         </div>

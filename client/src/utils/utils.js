@@ -1,6 +1,6 @@
-const getPlayerFromId = async(id) => {
+export const getPlayerFromId = async(id) => {
   let pData = {};
-  await fetch('http://localhost:3009/api/players/' + id, {
+  await fetch(`${process.env.REACT_APP_SERVER_URL}/api/players/` + id, {
     method: 'GET'    
   }).then(async(data) => {
     let player = await data.json();
@@ -10,9 +10,9 @@ const getPlayerFromId = async(id) => {
   return pData.length > 0 ? pData[0] : [];
 }
 
-const getLeaderboard = async(limit, setLoading, setPlayers) => {
+export const getLeaderboard = async(limit, setLoading, setPlayers) => {
   setLoading(true);
-  await fetch('http://localhost:3009/api/leaderboard', {
+  await fetch(`${process.env.REACT_APP_SERVER_URL}/api/leaderboard`, {
     method: "GET",
     headers: {
       limit
@@ -37,13 +37,14 @@ const getLeaderboard = async(limit, setLoading, setPlayers) => {
   })
 }
 
-const getTournaments = async(page, rows, setLoading, setTournaments) => {
+export const getTournaments = async(page, rows, setLoading, setTournaments, level = "") => {
   let data;
-  await fetch(`http://localhost:3009/api/tournaments`, {
+  await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournaments`, {
     method: 'GET',
     headers: {
       page,
-      rows
+      rows,
+      level,
     }
   }).then(async(tour) => {
     let res = await tour.json();
@@ -80,19 +81,12 @@ const getTournaments = async(page, rows, setLoading, setTournaments) => {
   return data;
 }
 
-const findTournament = async(id) => {
-  await fetch(`http://localhost:3009/api/tournaments/${id}`, {
+export const findTournament = async(id) => {
+  await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournaments/${id}`, {
     method: 'GET'
   }).then(async(tour) => {
     let res = await tour.json();
 
     return res;
   });
-}
-
-module.exports = {
-  getPlayerFromId,
-  getLeaderboard,
-  findTournament,
-  getTournaments
 }
