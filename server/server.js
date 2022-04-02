@@ -37,7 +37,7 @@ app.use(cors({
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", process.env.SERVER_CLIENT_URL);
   next();
 })
 
@@ -49,5 +49,18 @@ mongoose.connect(process.env.SERVER_MONGO_URL, {
 app.use("/auth", auth);
 app.use("/api", api);
 app.use("/users", users);
+
+app.use(express.static("../client/build"))
+app.get("/", (req, res, next) => {
+  //res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"))
+  res.sendFile(path.join(__dirname, '../client/build/index.html'))
+})
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 app.listen(process.env.SERVER_PORT, () => console.log(`Listenting on Port ${process.env.SERVER_PORT}.`));

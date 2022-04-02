@@ -1,2 +1,1 @@
-GET http://localhost:3009/api/leaderboards
-limit: 20
+GET https://www.ultimatetennisstatistics.com/tournamentsTable?current=1&rowCount=20&searchPhrase=&fromSeason=2015&toSeason=&level=A&surface=&indoor=&speed=&_=1648910052704
