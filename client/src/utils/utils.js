@@ -81,12 +81,52 @@ export const getTournaments = async(page, rows, setLoading, setTournaments, leve
   return data;
 }
 
-export const findTournament = async(id) => {
-  await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournaments/${id}`, {
+export const findTournament = async(id, setTourney) => {
+  let data;
+  await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournament/` + id, {
     method: 'GET'
   }).then(async(tour) => {
     let res = await tour.json();
 
-    return res;
+    let formatData = res.rows.map((x) => {
+      let level = "";
+      if(x.level == "B") level = "250";
+      if(x.level == "A") level = "500";
+      if(x.level == "M") level = "Masters";
+      if(x.level == "G") level = "Grand Slam";
+
+      let surface = "";
+      if(x.surface == "H") surface = "Hard";
+      if(x.surface == "P") surface = "Carpet";
+      if(x.surface == "C") surface = "Clay";
+      if(x.surface == "G") surface = "Grass";
+
+      return {
+        name: x.name,
+        level,
+        surface,
+        drawSize: x.drawSize,
+        season: x.season,
+        winner: x.winner.name,
+        winner_loc: x.winner.country.code,
+      };
+    });
+
+    console.log(formatData)
+
+    setTourney([
+      formatData[0],
+      formatData[1],
+      formatData[2]
+    ]);
+
+    return data = formatData;
+  }).then((r) => {
+    setTourney([
+      r[0],
+      r[1],
+      r[2]
+    ]);
   });
+  return data;
 }

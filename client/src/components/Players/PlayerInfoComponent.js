@@ -2,8 +2,7 @@ import { useParams, useEffect, useState } from 'react'
 import NavComponent from '../Navigation/NavComponent'
 import FooterComponent from '../Other/FooterComponent'
 
-function InfoComponent() {
-
+function PlayerInfoComponent() {
   return (
     <div>
       <NavComponent active={"players"} />
@@ -86,4 +85,4 @@ function InfoComponent() {
   )
 }
 
-export default InfoComponent
+export default PlayerInfoComponent

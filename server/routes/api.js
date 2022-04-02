@@ -60,6 +60,13 @@ router.get("/tournaments/search", async(req, res) => {
   });
 })
 
+router.get("/tournament/:id", async(req, res) => {
+  await fetch(`https://www.ultimatetennisstatistics.com/tournamentEventsTable?tournamentId=${req.params.id}&current=1&rowCount=15&sort%5Bdate%5D=desc&searchPhrase=`).then(async(data) => {
+    let result = await data.json();
+    res.json(result).status(200);
+  });
+});
+
 router.get("/players/search", async(req, res) => {
   let query = req.headers.search;
   if(query == '') {
