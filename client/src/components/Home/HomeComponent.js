@@ -4,6 +4,7 @@ import FooterComponent from '../Other/FooterComponent'
 import 'aos'
 import './animateImage.css'
 import { getLeaderboard } from '../../utils/utils'
+import { Link } from 'react-router-dom'
 
 function HomeComponent() {
   const [loading, setLoading] = useState(false);
@@ -50,7 +51,11 @@ function HomeComponent() {
                     {players.map((p, i) => (
                       <tr>
                         <th scope="row">{ p.rank }</th>
-                        <td>{ p.fullName }</td>
+                        <td>
+                          <Link to={"/players/" + p.id} style={{ textDecoration: "none" }}>
+                            { p.fullName }
+                          </Link>
+                        </td>
                         <td>{ p.country }</td>
                         <td>{ p.points }</td>
                       </tr>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { getTournaments } from '../../utils/utils';
 
@@ -11,8 +12,12 @@ function TournamentList({ tournaments, setTournaments, currPage, setCurrPage, lo
   }, []);
 
   return tournaments.map((tour, i) => (
-    <tr onClick={(() => navigate(`/tournament/${tour.id}`))}>
-      <td scope="row">{ tour.name }</td>
+    <tr>
+      <td scope="row">
+        <Link to={"/tournament/" + tour.id} style={{ textDecoration: "none" }}>
+          { tour.name }
+        </Link>
+      </td>
       <td>{ tour.surfaces }</td>
       <td>{ tour.levels }</td>
       <td>{ tour.topPlayers[0].name }</td>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { getLeaderboard } from '../../utils/utils';
 
 function PlayerList({ players, setPlayers, currPage, setCurrPage, loading, setLoading }) {
@@ -11,7 +12,11 @@ function PlayerList({ players, setPlayers, currPage, setCurrPage, loading, setLo
   return players.map((p, i) => (
     <tr>
       <th scope="row">{ p.rank }</th>
-      <td>{ p.fullName }</td>
+      <td>
+        <Link to={"/player/" + p.id} style={{ textDecoration: "none" }}>
+          { p.fullName }
+        </Link>
+      </td>
       <td>{ p.country }</td>
       <td>{ p.points }</td>
     </tr>

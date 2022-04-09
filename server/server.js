@@ -9,24 +9,6 @@ const auth = require("./routes/auth");
 const users = require("./routes/users");
 const api = require("./routes/api");
 
-/* const results = [], rankings = [];
-
-fs.createReadStream('atp_rankings_current.csv')
-  .pipe(csv())
-  .on('data', (data) => {
-    rankings.push({
-      date: data.ranking_date,
-      rank: data.rank,
-      player: data.player,
-      points: data.points,
-    });
-  })
-  .on('end', async() => {
-    await RankingsSchema.insertMany(rankings, function(error, docs) {
-      console.log('done')
-    });
-  }); */
-
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({

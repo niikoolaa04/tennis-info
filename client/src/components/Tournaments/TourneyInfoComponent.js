@@ -1,38 +1,29 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { findTournament } from '../../utils/utils';
-import flags from '../../utils/flags.json';
 import FooterComponent from '../Other/FooterComponent'
 import NavComponent from '../Navigation/NavComponent'
 
 function TourneyInfoComponent() {
   let { tournamentId } = useParams();
   const [tourney, setTourney] = useState([{}]);
-  const [winners, setWinners] = useState(null);
-  const [level, setLevel] = useState("");
-  const [surface, setSurface] = useState("");
-
-  const bgColor = () => {
-    if(tourney[0].level == "Grand Slam") setLevel("#FF0000");
-    else if(tourney[0].level == "Masters") setLevel("#4287f5");
-    else if(tourney[0].level == "500") setLevel("#4287f5");
-    else if(tourney[0].level == "250") setLevel("#82b0fa");
-  }
-
-  const surfaceColor = () => {
-    if(tourney[0].surface == "Hard") setSurface("#FF0000");
-    else if(tourney[0].surface == "Carpet") setSurface("#ff38c3");
-    else if(tourney[0].surface == "Clay") setSurface("#fcd200");
-    else if(tourney[0].surface == "Grass") setSurface("#00ab14");
-  }
+  const [winners, setWinners] = useState([{}]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(async() => {
-    await findTournament(tournamentId, setTourney).then(() => {
-      console.log(tourney)
-      setWinners(tourney.map((x) => `${x.winner} (${x.winner_loc}), `.trim()))
+    await findTournament(tournamentId, setTourney).then(async(data) => {
+      if(!data[0]) return navigate("/tournaments");
+      await setWinners([
+        `${data[0].winner} (${data[0].winner_loc})`,
+        data[1] ? `${data[1].winner} (${data[1].winner_loc})` : "",
+        data[2] ? `${data[2].winner} (${data[2].winner_loc})` : "",
+      ]);
+      setTourney(data);
+      setLoading(false);
+    }).catch((err) => {
+      navigate("/tournaments");
     });
-    bgColor();
-    surfaceColor();
   }, [])
 
   return (
@@ -43,8 +34,8 @@ function TourneyInfoComponent() {
         <div className="container">
           <div className="row">
             <div className='mt-5 text-center'>
-              <img className='tennisIcon' src="https://cdn-icons-png.flaticon.com/128/1163/1163109.png" alt="PlayerInfo" />
-              <h1 className='text-center font-weight-bold mt-4'>Player Info</h1>
+              <img className='tennisIcon' src="https://cdn-icons-png.flaticon.com/128/2641/2641497.png" alt="PlayerInfo" />
+              <h1 className='text-center font-weight-bold mt-4'>Tournament Info</h1>
             </div>
           </div>
         </div>
@@ -61,13 +52,13 @@ function TourneyInfoComponent() {
                   <tr>
                     <th>Level</th>
                     <td>
-                      <span className='px-2 py-1 rounded-sm text-white' style={{ backgroundColor: `${level}` }}>{ tourney[0].level }</span>
+                      <span className='px-2 py-1 rounded-sm text-white' style={{ backgroundColor: `${tourney[0].levelColor}` }}>{ tourney[0].level }</span>
                     </td>
                   </tr>
                   <tr>
                     <th>Surface</th>
                     <td>
-                      <span className='px-2 py-1 rounded-sm text-white' style={{ backgroundColor: `${surface}` }}>{ tourney[0].surface }</span>
+                      <span className='px-2 py-1 rounded-sm text-white' style={{ backgroundColor: `${tourney[0].surfaceColor}` }}>{ tourney[0].surface }</span>
                     </td>
                   </tr>
                   <tr>
@@ -76,15 +67,23 @@ function TourneyInfoComponent() {
                   </tr>
                   <tr>
                     <th>Winner</th>
-                      <td>{ tourney[0].winner } ({ tourney[0].winner_loc })</td>
+                    <td>
+                      <Link to={"/player/" + tourney[0].runnerUp_id} style={{ textDecoration: "none" }}>
+                        { tourney[0].winner } ({ tourney[0].winner_loc })
+                      </Link>
+                    </td>
                   </tr>
                   <tr>
-                    <th>Coach</th>
-                    <td>Name Name</td>
+                    <th>Loser</th>
+                    <td>
+                      <Link to={"/player/" + tourney[0].winner_id} style={{ textDecoration: "none" }}>
+                        { tourney[0].runnerUp }
+                      </Link>
+                    </td>
                   </tr>
                   <tr>
-                    <th>Prize Money</th>
-                    <td>$2.000.000</td>
+                    <th>Score</th>
+                    <td>{ tourney[0].score }</td>
                   </tr>
                 </tbody>
               </table>
@@ -94,7 +93,7 @@ function TourneyInfoComponent() {
                 <tbody>
                   <tr>
                     <th>Latest Winners</th>
-                    <td>{ winners }</td>
+                    <td>{ winners.map((x) => `${x}, `) }</td>
                   </tr>
                 </tbody>
               </table>

@@ -23,9 +23,10 @@ export const getLeaderboard = async(limit, setLoading, setPlayers) => {
     let result = res.map(async(x) => {
       let getPlayer = await getPlayerFromId(parseInt(x.player));
       let obj = {
+        id: x.player,
         rank: x.rank,
         fullName: getPlayer.firstName + ' ' + getPlayer.lastName,
-        country: getPlayer.country,
+        country: getPlayer.countryCode,
         points: x.points
       }
       return obj;
@@ -90,8 +91,8 @@ export const findTournament = async(id, setTourney) => {
 
     let formatData = res.rows.map((x) => {
       let level = "";
-      if(x.level == "B") level = "250";
-      if(x.level == "A") level = "500";
+      if(x.level == "B") level = "ATP 250";
+      if(x.level == "A") level = "ATP 500";
       if(x.level == "M") level = "Masters";
       if(x.level == "G") level = "Grand Slam";
 
@@ -101,32 +102,37 @@ export const findTournament = async(id, setTourney) => {
       if(x.surface == "C") surface = "Clay";
       if(x.surface == "G") surface = "Grass";
 
+      let surfaceColor = "";
+      if(surface == "Hard") surfaceColor = "#FF0000";
+      else if(surface == "Carpet") surfaceColor = "#ff38c3";
+      else if(surface == "Clay") surfaceColor = "#fcd200";
+      else if(surface == "Grass") surfaceColor = "#00ab14";
+
+      let levelColor = "";
+      if(level == "Grand Slam") levelColor = "#FF0000";
+      else if(level == "Masters") levelColor = "#4287f5";
+      else if(level == "ATP 500") levelColor = "#4287f5";
+      else if(level == "ATP 250") levelColor = "#82b0fa";
+
       return {
+        id: x.id,
         name: x.name,
         level,
+        levelColor,
         surface,
+        surfaceColor,
         drawSize: x.drawSize,
+        score: x.score,
+        runnerUp: `${x.runnerUp.name} (${x.runnerUp.country.id})`,
+        runnerUp_id: x.runnerUp.id,
         season: x.season,
         winner: x.winner.name,
-        winner_loc: x.winner.country.code,
+        winner_id: x.winner.id,
+        winner_loc: x.winner.country.code.toUpperCase(),
       };
     });
 
-    console.log(formatData)
-
-    setTourney([
-      formatData[0],
-      formatData[1],
-      formatData[2]
-    ]);
-
     return data = formatData;
-  }).then((r) => {
-    setTourney([
-      r[0],
-      r[1],
-      r[2]
-    ]);
   });
   return data;
 }

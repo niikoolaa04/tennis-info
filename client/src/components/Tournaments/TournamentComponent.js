@@ -30,7 +30,7 @@ function TournamentComponent() {
         <div className="container">
           <div className="row">
             <div className='mt-5 text-center'>
-              <img className='tennisIcon' src="https://cdn-icons-png.flaticon.com/128/2317/2317989.png" alt="PlayerInfo" />
+              <img className='tennisIcon' src="https://cdn-icons-png.flaticon.com/128/419/419952.png" alt="PlayerInfo" />
               <h1 className='text-center font-weight-bold mt-4'>Tournament List</h1>
             </div>
           </div>

@@ -4,6 +4,8 @@ import PlayersComponent from "./components/Players/PlayersComponent";
 import PlayerInfoComponent from "./components/Players/PlayerInfoComponent";
 import TournamentComponent from "./components/Tournaments/TournamentComponent";
 import TourneyInfoComponent from "./components/Tournaments/TourneyInfoComponent";
+import NotFoundComponent from "./components/Other/NotFoundComponent";
+import './index.css';
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
         <Route path="/tournaments" element={<TournamentComponent />} />
         <Route path="/player/:playerId" element={<PlayerInfoComponent />} />
         <Route path="/tournament/:tournamentId" element={<TourneyInfoComponent />} />
+        <Route path="*" element={<NotFoundComponent />} />
       </Routes>
     </BrowserRouter>
   </div>
