@@ -1,1 +1,1 @@
-GET https://www.ultimatetennisstatistics.com/playerProfile?playerId=4920&tab=profile
+GET http://localhost:3009/api/leaderboard

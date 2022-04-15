@@ -4,6 +4,16 @@ const PlayersSchema = new mongoose.Schema({
   id: {
     type: Number
   },
+  rank: {
+    type: Number,
+  },
+  points: {
+    type: Number,
+  },
+  atp_date: {
+    type: String,
+    default: "N/A"
+  },
   firstName: {
     type: String,
     default: "N/A"
@@ -54,7 +64,7 @@ const PlayersSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: "https://st4.depositphotos.com/17828278/24401/v/600/depositphotos_244011872-stock-illustration-image-vector-symbol-missing-available.jpg"
+    default: "https://www.komysafety.com/images/banner/no-image.png"
   },
 });
 

@@ -10,16 +10,16 @@ function TournamentComponent() {
   const [loading, setLoading] = useState(true);
   const [currPage, setCurrPage] = useState(1);
   const [level, setLevel] = useState('');
+  const [surface, setSurface] = useState('');
   const prevPage = () => currPage == 1 ? setCurrPage(currPage) : setCurrPage(currPage - 1);
   const nextPage = () => currPage == 100 ? setCurrPage(currPage) : setCurrPage(currPage + 1);
 
-  const filterType = async(text) => {
-    setLevel(text);
-    await getTournaments(currPage, 20, setLoading, setTournaments, level);
-  }
+  useEffect(async() => {
+    await getTournaments(currPage, 20, setLoading, setTournaments, level, surface);
+  }, [level, surface]);
 
   useEffect(async() => {
-    await getTournaments(currPage, 20, setLoading, setTournaments, level);
+    await getTournaments(currPage, 20, setLoading, setTournaments, level, surface);
   }, []);
 
   return (
@@ -36,7 +36,7 @@ function TournamentComponent() {
           </div>
         </div>
         {/* SEARCH FOR PLAYER FORM */}
-        <SearchComponent loading={loading} setLoading={setLoading} tournaments={tournaments} setTournaments={setTournaments} setCurrPage={setCurrPage} filterType={filterType} />
+        <SearchComponent loading={loading} setLoading={setLoading} setTournaments={setTournaments} setLevel={setLevel} setSurface={setSurface} />
         {/* PLAYER LIST TABLE */}
         <div class="dropdown">
         <div className="container">
@@ -65,8 +65,8 @@ function TournamentComponent() {
                     currPage == 1 ?
                     <>
                       <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                      <li className="page-item"><a className="page-link" href="#">2</a></li>
-                      <li className="page-item"><a className="page-link" href="#">3</a></li>
+                      <li className="page-item"><a className="page-link" href="#" onClick={(() => setCurrPage(2))}>2</a></li>
+                      <li className="page-item"><a className="page-link" href="#" onClick={(() => setCurrPage(3))}>3</a></li>
                     </> : 
                     <>
                       <li className="page-item"><a className="page-link" href="#" onClick={(() => setCurrPage(currPage - 1))}>{ currPage - 1 }</a></li>

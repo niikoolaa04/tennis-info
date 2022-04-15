@@ -54,6 +54,30 @@ fs.createReadStream('atp_rankings_current.csv')
     });
   }); */
 
+  /*
+  const PlayerSchema = require("./models/Players")
+let fs = require("fs");
+
+fs.readFile('./olddata/mplayers.json', (err, data) => {
+  if (err) throw err;
+  let student = JSON.parse(data);
+  student.forEach((x) => {
+    PlayerSchema.bulkWrite([
+      {
+        updateOne: {
+          filter: { firstName: x.first_name, lastName: x.last_name },
+          update: { 
+            image: x.featureImage == null ? 'https://www.komysafety.com/images/banner/no-image.png' : x.featureImage.replace("/action", ""),
+          }
+        }
+      },
+    ]).then(res => {
+      console.log(res.modifiedCount);
+    });
+  })
+});
+  */
+
   /* PlayerSchema.updateMany({}, { $rename: { country: 'countryCode' } }, { multi: true }, function(err, blocks) {
     if(err) { throw err; }
     console.log('done!');

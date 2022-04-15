@@ -14,13 +14,13 @@ router.use(cors({
 router.use(cookieParser());
 
 router.get("/leaderboard", async(req, res) => {
-  RankingsSchema.find({}, null, { sort: { rank: 1 } }, (err, post) => {
+  PlayersSchema.find({ }, null, { sort: { rank: 1 } }, (err, post) => {
     res.json(post).status(200);
   }).limit(req.headers.limit)
 });
 
 router.get("/tournaments", async(req, res) => {
-  await fetch(`https://www.ultimatetennisstatistics.com/tournamentsTable?current=${req.headers.page}&rowCount=20&searchPhrase=&fromSeason=2017&toSeason=&level=${req.headers.level}&surface=&indoor=&speed=&_=1648313910758`).then(async(data) => {
+  await fetch(`https://www.ultimatetennisstatistics.com/tournamentsTable?current=${req.headers.page}&rowCount=20&searchPhrase=&fromSeason=2017&toSeason=&level=${req.headers.level}&surface=${req.headers.surface}&indoor=&speed=&_=1648313910758`).then(async(data) => {
     let result = await data.json();
     res.json(result).status(200);
   });

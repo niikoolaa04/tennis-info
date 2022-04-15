@@ -1,15 +1,3 @@
-export const getPlayerFromId = async(id) => {
-  let pData = {};
-  await fetch(`${process.env.REACT_APP_SERVER_URL}/api/players/` + id, {
-    method: 'GET'    
-  }).then(async(data) => {
-    let player = await data.json();
-    pData = player;
-  });
-
-  return pData.length > 0 ? pData[0] : [];
-}
-
 export const getLeaderboard = async(limit, setLoading, setPlayers) => {
   setLoading(true);
   await fetch(`${process.env.REACT_APP_SERVER_URL}/api/leaderboard`, {
@@ -21,12 +9,11 @@ export const getLeaderboard = async(limit, setLoading, setPlayers) => {
     let res = await data.json();
     res = res.slice(res.length-20, limit);
     let result = res.map(async(x) => {
-      let getPlayer = await getPlayerFromId(parseInt(x.player));
       let obj = {
-        id: x.player,
+        id: x.id,
         rank: x.rank,
-        fullName: getPlayer.firstName + ' ' + getPlayer.lastName,
-        country: getPlayer.countryCode,
+        fullName: x.firstName + ' ' + x.lastName,
+        country: x.countryCode,
         points: x.points
       }
       return obj;
@@ -38,7 +25,7 @@ export const getLeaderboard = async(limit, setLoading, setPlayers) => {
   })
 }
 
-export const getTournaments = async(page, rows, setLoading, setTournaments, level = "") => {
+export const getTournaments = async(page, rows, setLoading, setTournaments, level = "", surface = "") => {
   let data;
   await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournaments`, {
     method: 'GET',
@@ -46,6 +33,7 @@ export const getTournaments = async(page, rows, setLoading, setTournaments, leve
       page,
       rows,
       level,
+      surface,
     }
   }).then(async(tour) => {
     let res = await tour.json();

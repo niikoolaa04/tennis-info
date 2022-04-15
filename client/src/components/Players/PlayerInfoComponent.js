@@ -84,7 +84,7 @@ function PlayerInfoComponent() {
             </div>
             <div className='col-md-3 text-center'>
               <div style={{ backgroundColor: "rgba(0,0,0,.1)" }} className="pt-4 pb-2 rounded-sm">
-                <img src="https://images.usopen.org/ix-events-usta-players/atpd643.jpg" alt={player.firstName + " " + player.lastName} />
+                <img src={ player.image } alt={player.firstName + " " + player.lastName} />
                 <p className='p-0 pt-2 m-0'>{ player.firstName + " " + player.lastName }</p>
                 <p className='p-0 pb-3 m-0 leading-0'>{ player.countryCode }</p>
               </div>
