@@ -42,7 +42,8 @@ function TourneyInfoComponent() {
         {/* PLAYER INFORMATION */}
         <div className="container">
           <div className="row mt-5">
-            <div className='col-6'>
+            {/* OVDE */}
+            <div className='col-md-6'> 
               <table className="table table-hover">
                 <tbody>
                   <tr>
@@ -88,7 +89,7 @@ function TourneyInfoComponent() {
                 </tbody>
               </table>
             </div>
-            <div className='col-6'>
+            <div className='col-md-6'>
               <table className="table table-hover">
                 <tbody>
                   <tr>

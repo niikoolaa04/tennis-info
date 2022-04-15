@@ -34,7 +34,7 @@ function PlayerInfoComponent() {
         {/* PLAYER INFORMATION */}
         <div className="container">
           <div className="row mt-5">
-            <div className='col-5'>
+            <div className='col-md-5'>
               <table className="table table-hover">
                 <tbody>
                   <tr>
@@ -72,7 +72,7 @@ function PlayerInfoComponent() {
                 </tbody>
               </table>
             </div>
-            <div className='col-4'>
+            <div className='col-md-4'>
               <table className="table table-hover">
                 <tbody>
                   <tr>
@@ -82,7 +82,7 @@ function PlayerInfoComponent() {
                 </tbody>
               </table>
             </div>
-            <div className='col-3 text-center'>
+            <div className='col-md-3 text-center'>
               <div style={{ backgroundColor: "rgba(0,0,0,.1)" }} className="pt-4 pb-2 rounded-sm">
                 <img src="https://images.usopen.org/ix-events-usta-players/atpd643.jpg" alt={player.firstName + " " + player.lastName} />
                 <p className='p-0 pt-2 m-0'>{ player.firstName + " " + player.lastName }</p>

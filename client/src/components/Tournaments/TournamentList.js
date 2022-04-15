@@ -5,8 +5,6 @@ import { getTournaments } from '../../utils/utils';
 
 function TournamentList({ tournaments, setTournaments, currPage, setCurrPage, loading, setLoading, level = "" }) {
 
-  const navigate = useNavigate();
-
   useEffect(async() => {
     await getTournaments(currPage, 20, setLoading, setTournaments, level);
   }, []);

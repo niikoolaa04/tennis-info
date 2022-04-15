@@ -92,9 +92,10 @@ export const findTournament = async(id, setTourney) => {
     let formatData = res.rows.map((x) => {
       let level = "";
       if(x.level == "B") level = "ATP 250";
-      if(x.level == "A") level = "ATP 500";
-      if(x.level == "M") level = "Masters";
-      if(x.level == "G") level = "Grand Slam";
+      else if(x.level == "A") level = "ATP 500";
+      else if(x.level == "M") level = "Masters";
+      else if(x.level == "G") level = "Grand Slam";
+      else if(x.level == "F") level = "Finals";
 
       let surface = "";
       if(x.surface == "H") surface = "Hard";
@@ -113,6 +114,7 @@ export const findTournament = async(id, setTourney) => {
       else if(level == "Masters") levelColor = "#4287f5";
       else if(level == "ATP 500") levelColor = "#4287f5";
       else if(level == "ATP 250") levelColor = "#82b0fa";
+      else if(level == "Finals") levelColor = "#4c32a8";
 
       return {
         id: x.id,
