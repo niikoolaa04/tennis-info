@@ -69,7 +69,7 @@ function TourneyInfoComponent() {
                   <tr>
                     <th>Winner</th>
                     <td>
-                      <Link to={"/player/" + tourney[0].runnerUp_id} style={{ textDecoration: "none" }}>
+                      <Link to={"/players/" + tourney[0].runnerUp_id} style={{ textDecoration: "none" }}>
                         { tourney[0].winner } ({ tourney[0].winner_loc })
                       </Link>
                     </td>
@@ -77,7 +77,7 @@ function TourneyInfoComponent() {
                   <tr>
                     <th>Loser</th>
                     <td>
-                      <Link to={"/player/" + tourney[0].winner_id} style={{ textDecoration: "none" }}>
+                      <Link to={"/players/" + tourney[0].winner_id} style={{ textDecoration: "none" }}>
                         { tourney[0].runnerUp }
                       </Link>
                     </td>
@@ -94,11 +94,14 @@ function TourneyInfoComponent() {
                 <tbody>
                   <tr>
                     <th>Latest Winners</th>
-                    <td>{ winners.map((x) => `${x}, `) }</td>
+                    <td>{ winners.join(", ") }</td>
                   </tr>
                 </tbody>
               </table>
             </div>
+          </div>
+          <div className='my-2'>
+            <a href="/tournaments" className="btn btn-primary">Return to List</a>
           </div>
         </div>
       </div>

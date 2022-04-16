@@ -41,7 +41,7 @@ function SearchComponent({ setTournaments, loading, setLoading, setLevel, setSur
                 <a class="dropdown-item" href="#" onClick={(() => setLevel(""))}>None</a>
                 <a class="dropdown-item" href="#" onClick={(() => setLevel("B"))}>ATP 250</a>
                 <a class="dropdown-item" href="#" onClick={(() => setLevel("A"))}>ATP 500</a>
-                <a class="dropdown-item" href="#" onClick={(() => setLevel("M"))}>Masters</a>
+                <a class="dropdown-item" href="#" onClick={(() => setLevel("M"))}>Masters (ATP 1000)</a>
                 <a class="dropdown-item" href="#" onClick={(() => setLevel("G"))}>Grand Slam</a>
               </div>
             </div>

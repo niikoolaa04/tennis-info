@@ -3,16 +3,50 @@ import NavComponent from '../Navigation/NavComponent'
 import FooterComponent from '../Other/FooterComponent'
 import 'aos'
 import './animateImage.css'
-import { getLeaderboard } from '../../utils/utils'
+import { getLeaderboard, getLevel, getSurface } from '../../utils/utils'
 import { Link } from 'react-router-dom'
 
 function HomeComponent() {
   const [loading, setLoading] = useState(false);
   const [players, setPlayers] = useState([]);
+  const [first, setFirst] = useState([{ fullName: '' }, { fullName: '' }]);
+  const [latestTourney, setLatestTourney] = useState({});
+  const [best, setBest] = useState({});
   const limit = 10;
   
   useEffect(async() => {
-    await getLeaderboard(limit, setLoading, setPlayers)
+    await getLeaderboard(limit, setLoading, setPlayers, setFirst);
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournament/latest`, {
+      method: "GET",
+    }).then(async(res) => {
+      let resp = await res.json();
+
+      setLatestTourney({
+        name: resp.rows[0].name,
+        level: getLevel(resp.rows[0].level),
+        surface: getSurface(resp.rows[0].surface),
+        favorite_one: `${resp.rows[0].favorite1.name} (${resp.rows[0].favorite1.country.id})`,
+        favorite_two: `${resp.rows[0].favorite2.name} (${resp.rows[0].favorite2.country.id})`,
+        completed: resp.rows[0].completed,
+        player_count: resp.rows[0].playerCount
+      });
+    });
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/api/players/goat`, {
+      method: "GET",
+    }).then(async(res) => {
+      let resp = await res.json();
+
+      setBest({
+        name: resp.rows[0].name,
+        country: `${resp.rows[0].country.id}`,
+        total_points: `${resp.rows[0].totalPoints}`,
+        grand_slams: `${resp.rows[0].grandSlams}`,
+        masters: `${resp.rows[0].masters}`,
+        titles: `${resp.rows[0].titles}`,
+        won_lost: `${resp.rows[0].wonLost}`,
+        won_percent: `${resp.rows[0].wonPct}`,
+      });
+    });
   }, [])
 
   return (
@@ -80,7 +114,8 @@ function HomeComponent() {
                   <img src="https://i0.wp.com/shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png?resize=1024%2C683&ssl=1" className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h5 className="card-title">Number #1 Player</h5>
-                    <p className="card-text">First Last is First Player on ATP List with total of x Points</p>
+                    <p className="card-text">First Player on ATP List is <b>{first[0].fullName}</b> with total of <b>{first[0].points}</b> Points.
+                    <br />Runner up is <b>{first[1].fullName}</b> with total of <b>{first[1].points}</b> Points.</p>
                     <a href="#" className="btn btn-primary">View Player</a>
                   </div>
                 </div>
@@ -88,7 +123,8 @@ function HomeComponent() {
                   <img src="https://i0.wp.com/shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png?resize=1024%2C683&ssl=1" className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h5 className="card-title">GOAT</h5>
-                    <p className="card-text">First Last is Greatest Player of All Times with x total points!</p>
+                    <p className="card-text"><b>{best.name} ({best.country})</b> is the GOAT with total of <b>{best.total_points}</b> points and <b>{best.titles}</b> Titles of which <b>{best.grand_slams}</b> are <u>Grand Slams</u> & <b>{best.masters}</b> are <u>Masters</u>.
+                    <br/><b>Won-Lost:</b> {best.won_lost} ({best.won_percent}).</p>
                     <a href="#" className="btn btn-primary">View Player</a>
                   </div>
                 </div>
@@ -96,7 +132,7 @@ function HomeComponent() {
                   <img src="https://i0.wp.com/shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png?resize=1024%2C683&ssl=1" className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h5 className="card-title">Latest Tournament</h5>
-                    <p className="card-text">Tournament was latest tournament played, winner of this tournament is Winner</p>
+                    <p className="card-text">Latest tournament is <b>{latestTourney.name}</b> which is of Level <b>{latestTourney.level}</b>.<br />First Favorite of Tournament is <b>{latestTourney.favorite_one}</b> & is played on <b>{latestTourney.surface}</b>.</p>
                     <a href="#" className="btn btn-primary">View Tournament</a>
                   </div>
                 </div>

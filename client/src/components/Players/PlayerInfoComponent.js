@@ -6,6 +6,7 @@ import FooterComponent from '../Other/FooterComponent'
 function PlayerInfoComponent() {
   const { playerId } = useParams();
   const [player, setPlayer] = useState({});
+  const [flag, setFlag] = useState("");
   const navigate = useNavigate();
 
   useEffect(async() => {
@@ -13,6 +14,7 @@ function PlayerInfoComponent() {
       let data = await res.json();
       if(!data[0]) return navigate("/players")
       if(data[0]) setPlayer(data[0]);
+      if(data[0]) setFlag(`https://www.ultimatetennisstatistics.com/images/flags/${data[0].countryCode.slice(0, 2).toLowerCase()}.png`);
     }).catch((err) => {
       navigate("/players")
     })
@@ -86,9 +88,14 @@ function PlayerInfoComponent() {
               <div style={{ backgroundColor: "rgba(0,0,0,.1)" }} className="pt-4 pb-2 rounded-sm">
                 <img src={ player.image } alt={player.firstName + " " + player.lastName} />
                 <p className='p-0 pt-2 m-0'>{ player.firstName + " " + player.lastName }</p>
-                <p className='p-0 pb-3 m-0 leading-0'>{ player.countryCode }</p>
+                <span className='align-middle'>
+                  <img src={flag} className="mr-1" alt={player.countryCode} />
+                </span>
               </div>
             </div>
+          </div>
+          <div className='my-2'>
+            <a href="/players" className="btn btn-primary">Return to List</a>
           </div>
         </div>
       </div>

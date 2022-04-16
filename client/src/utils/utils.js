@@ -1,4 +1,4 @@
-export const getLeaderboard = async(limit, setLoading, setPlayers) => {
+export const getLeaderboard = async(limit, setLoading, setPlayers, setFirst) => {
   setLoading(true);
   await fetch(`${process.env.REACT_APP_SERVER_URL}/api/leaderboard`, {
     method: "GET",
@@ -21,6 +21,8 @@ export const getLeaderboard = async(limit, setLoading, setPlayers) => {
 
 
     setPlayers(await Promise.all(result));
+    let promised = await Promise.all(result);
+    if(setFirst) setFirst([promised[0], promised[1]])
     setLoading(true);
   })
 }
@@ -41,7 +43,7 @@ export const getTournaments = async(page, rows, setLoading, setTournaments, leve
     let formatData = res.rows.map((x) => {
       let level = [];
       if(x.levels[0] == "G") level.push("Grand Slam");
-      if(x.levels[0] == "M" || x.levels[1] == "M") level.push("Masters");
+      if(x.levels[0] == "M" || x.levels[1] == "M") level.push("Masters (ATP 1000)");
       if(x.levels[0] == "A" || x.levels[1] == "A") level.push("ATP 500");
       if(x.levels[0] == "B" || x.levels[1] == "B") level.push("ATP 250");
       if(x.levels[0] == "O" || x.levels[1] == "O") level.push("Olympics");
@@ -70,6 +72,26 @@ export const getTournaments = async(page, rows, setLoading, setTournaments, leve
   return data;
 }
 
+export const getLevel = (level) => {
+  let format = "";
+  if(level == "B") format = "ATP 250";
+  else if(level == "A") format = "ATP 500";
+  else if(level == "M") format = "Masters (ATP 1000)";
+  else if(level == "G") format = "Grand Slam";
+  else if(level == "F") format = "Finals";
+
+  return format;
+}
+
+export const getSurface = (surface) => {
+  let format = "";
+  if(surface == "H") format = "Hard";
+  if(surface == "P") format = "Carpet";
+  if(surface == "C") format = "Clay";
+  if(surface == "G") format = "Grass";
+  return format;
+}
+
 export const findTournament = async(id, setTourney) => {
   let data;
   await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournament/` + id, {
@@ -78,18 +100,9 @@ export const findTournament = async(id, setTourney) => {
     let res = await tour.json();
 
     let formatData = res.rows.map((x) => {
-      let level = "";
-      if(x.level == "B") level = "ATP 250";
-      else if(x.level == "A") level = "ATP 500";
-      else if(x.level == "M") level = "Masters";
-      else if(x.level == "G") level = "Grand Slam";
-      else if(x.level == "F") level = "Finals";
+      let level = getLevel(x.level);
 
-      let surface = "";
-      if(x.surface == "H") surface = "Hard";
-      if(x.surface == "P") surface = "Carpet";
-      if(x.surface == "C") surface = "Clay";
-      if(x.surface == "G") surface = "Grass";
+      let surface = getSurface(x.surface)
 
       let surfaceColor = "";
       if(surface == "Hard") surfaceColor = "#FF0000";
@@ -99,7 +112,7 @@ export const findTournament = async(id, setTourney) => {
 
       let levelColor = "";
       if(level == "Grand Slam") levelColor = "#FF0000";
-      else if(level == "Masters") levelColor = "#4287f5";
+      else if(level == "Masters (ATP 1000)") levelColor = "#4287f5";
       else if(level == "ATP 500") levelColor = "#4287f5";
       else if(level == "ATP 250") levelColor = "#82b0fa";
       else if(level == "Finals") levelColor = "#4c32a8";

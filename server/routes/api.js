@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const RankingsSchema = require("../models/Rankings");
 const PlayersSchema = require("../models/Players");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -33,7 +32,7 @@ router.get("/tournaments/search", async(req, res) => {
     tournament = tournament.map((x) => {
       let level = [];
       if(x.levels[0] == "G") level.push("Grand Slam");
-      if(x.levels[0] == "M" || x.levels[1] == "M") level.push("Masters");
+      if(x.levels[0] == "M" || x.levels[1] == "M") level.push("Masters (ATP 1000)");
       if(x.levels[0] == "A" || x.levels[1] == "A") level.push("ATP 500");
       if(x.levels[0] == "B" || x.levels[1] == "B") level.push("ATP 250");
       if(x.levels[0] == "O" || x.levels[1] == "O") level.push("Olympics");
@@ -60,6 +59,13 @@ router.get("/tournaments/search", async(req, res) => {
   });
 })
 
+router.get("/tournament/latest", async(req, res) => {
+  await fetch(`https://www.ultimatetennisstatistics.com/inProgressEventsTable?current=1&rowCount=-1&searchPhrase=&_=1650103550630`).then(async(data) => {
+    let result = await data.json();
+    res.json(result).status(200);
+  });
+})
+
 router.get("/tournament/:id", async(req, res) => {
   await fetch(`https://www.ultimatetennisstatistics.com/tournamentEventsTable?tournamentId=${req.params.id}&current=1&rowCount=15&sort%5Bdate%5D=desc&searchPhrase=`).then(async(data) => {
     let result = await data.json();
@@ -70,27 +76,28 @@ router.get("/tournament/:id", async(req, res) => {
 router.get("/players/search", async(req, res) => {
   let query = req.headers.search;
   if(query == '') {
-    RankingsSchema.find({ }, function (err, post) {
+    PlayersSchema.find({ }, function (err, post) {
       res.json(post).status(200);
 
       return;
     })
   }
   PlayersSchema.aggregate([
-    {$project: { "id": "$id", "hand": "$hand", "dob": "$dob", "country": "$country", "fullName" : { $concat : [ "$firstName", " ", "$lastName" ] } }},
+    {$project: { "id": "$id", "hand": "$hand", "rank": "$rank", "points": "$points", "dob": "$dob", "country": "$country", "fullName" : { $concat : [ "$firstName", " ", "$lastName" ] } }},
     {$match: {"fullName": {$regex: query, $options:'i'}}} ]).exec(async function(err, result) {
-    result = result.map(async(x) => {
-      let playerRank = await getRank(`${x.id}`);
-      x.rank = playerRank.rank;
-      x.points = playerRank.points;
-      return x;
-    });
 
     result = await Promise.all(result);
     result = result.sort((a, b) => a.rank - b.rank)
     res.json(result).status(200)
   });
 });
+
+router.get("/players/goat", async(req, res) => {
+  await fetch(`https://www.ultimatetennisstatistics.com/goatListTable?current=1&rowCount=3&sort%5BtotalPoints%5D=desc&searchPhrase=&oldLegends=true`).then(async(data) => {
+    let result = await data.json();
+    res.json(result).status(200);
+  });
+})
 
 router.get("/players/:id", async(req, res) => {
   PlayersSchema.find({ id: parseInt(req.params.id) }, (err, post) => {

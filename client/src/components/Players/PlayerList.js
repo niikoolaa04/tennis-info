@@ -13,7 +13,7 @@ function PlayerList({ players, setPlayers, currPage, setCurrPage, loading, setLo
     <tr>
       <th scope="row">{ p.rank }</th>
       <td>
-        <Link to={"/player/" + p.id} style={{ textDecoration: "none" }}>
+        <Link to={"/players/" + p.id} style={{ textDecoration: "none" }}>
           { p.fullName }
         </Link>
       </td>

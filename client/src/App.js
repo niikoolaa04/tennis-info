@@ -15,8 +15,8 @@ function App() {
         <Route path="/" element={<HomeComponent />} />
         <Route path="/players" element={<PlayersComponent />} />
         <Route path="/tournaments" element={<TournamentComponent />} />
-        <Route path="/player/:playerId" element={<PlayerInfoComponent />} />
-        <Route path="/tournament/:tournamentId" element={<TourneyInfoComponent />} />
+        <Route path="/players/:playerId" element={<PlayerInfoComponent />} />
+        <Route path="/tournaments/:tournamentId" element={<TourneyInfoComponent />} />
         <Route path="*" element={<NotFoundComponent />} />
       </Routes>
     </BrowserRouter>
