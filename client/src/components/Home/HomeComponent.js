@@ -54,7 +54,7 @@ function HomeComponent() {
       <NavComponent active={"home"} />
       <div>
         {/* GENERAL INFORMATION */}
-        <div className="container">
+        <div className="container bg">
           <div className="row">
             <div className='mt-5 text-center'>
               <img className='tennisIcon' src="https://cdn-icons-png.flaticon.com/128/502/502142.png" alt="TennisInfo" />

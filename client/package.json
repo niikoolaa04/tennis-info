@@ -18,6 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "scss": "sass ./src/scss/bootstrap.scss ./src/scss/bootstrap.css",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -6,6 +6,7 @@ import TournamentComponent from "./components/Tournaments/TournamentComponent";
 import TourneyInfoComponent from "./components/Tournaments/TourneyInfoComponent";
 import NotFoundComponent from "./components/Other/NotFoundComponent";
 import './index.css';
+import './scss/bootstrap.css'
 
 function App() {
   return (
