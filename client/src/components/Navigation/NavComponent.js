@@ -10,7 +10,7 @@ function NavComponent({ active = "home" }) {
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "#f0f0f0" }}>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className='container'>
             <a className="navbar-brand" href="#">Navbar</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

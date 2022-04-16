@@ -22,6 +22,7 @@ function HomeComponent() {
       let resp = await res.json();
 
       setLatestTourney({
+        id: resp.rows[0].id,
         name: resp.rows[0].name,
         level: getLevel(resp.rows[0].level),
         surface: getSurface(resp.rows[0].surface),
@@ -37,6 +38,7 @@ function HomeComponent() {
       let resp = await res.json();
 
       setBest({
+        id: resp.rows[0].playerId,
         name: resp.rows[0].name,
         country: `${resp.rows[0].country.id}`,
         total_points: `${resp.rows[0].totalPoints}`,
@@ -50,29 +52,35 @@ function HomeComponent() {
   }, [])
 
   return (
-    <div>
+    <div className='bg-darker'>
       <NavComponent active={"home"} />
-      <div>
+      <div className='bg-darker'>
         {/* GENERAL INFORMATION */}
-        <div className="container bg">
+        <div className="container">
           <div className="row">
-            <div className='mt-5 text-center'>
+            <div className='mt-5 text-center pt-5'>
               <img className='tennisIcon' src="https://cdn-icons-png.flaticon.com/128/502/502142.png" alt="TennisInfo" />
-              <h1 className='text-center font-weight-bold mt-4'>Tennis Info</h1>
+              <h1 className='text-center text-light font-weight-bold mt-4'>Tennis Info</h1>
               <div className='mt-4'>
-                <p className='mb-0'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, quos.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis sit recusandae laborum quod necessitatibus soluta.</p>
+                <p className='mb-0 text-light'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, quos.</p>
+                <p className='text-light'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis sit recusandae laborum quod necessitatibus soluta.</p>
               </div>
             </div>
           </div>
         </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+          <path fill="#212529" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
         {/* TOP 10 PLAYERS SECTION */}
-        <div className='pb-3 mt-5' style={{ backgroundColor: "#f0f0f0" }}>
+        <div className='pb-5 bg-dark'>
           <div className='container'>
             <div className="row">
-              <div className='mt-5'>
-                <h3 className='text-center'>Top 10 Players</h3>
-                <table className="table table-hover mt-5">
+              <div className='mt-3'>
+                <div>
+                  <p className='text-center display-5 fw-bold text-light'>Top 10 Players</p>
+                  <div className='d-block bg-light rounded' style={{ margin: "20px auto", width: "16rem", height: "2px" }} />
+                </div>
+                <table className="table table-hover mt-5 table-dark">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -86,7 +94,7 @@ function HomeComponent() {
                       <tr>
                         <th scope="row">{ p.rank }</th>
                         <td>
-                          <Link to={"/players/" + p.id} style={{ textDecoration: "none" }}>
+                          <Link to={"/players/" + p.id} className="text-lightaqua" style={{ textDecoration: "none" }}>
                             { p.fullName }
                           </Link>
                         </td>
@@ -106,34 +114,41 @@ function HomeComponent() {
         </div>
         {/* TOP STATISTICS */}
         <div className='container'>
-          <div className="row">
-            <div className="mt-5">
-              <h3 className="text-center">Top Statistics</h3>
+          <div className="row my-5">
+            <div>
+              <h3 className="text-center display-5 fw-bold text-light">Top Statistics</h3>
+              <div className='d-block bg-light rounded' style={{ margin: "20px auto", width: "16rem", height: "2px" }} />
               <div class="card-group">
-                <div data-aos="fade-right" className="card mt-4 mr-sm-2 mr-md-5">
+                <div data-aos="fade-right" className="card bg-carddark rounded-sm mt-4 mr-sm-2 mr-md-5 shadow-lg">
                   <img src="https://i0.wp.com/shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png?resize=1024%2C683&ssl=1" className="card-img-top" alt="..." />
                   <div className="card-body">
-                    <h5 className="card-title">Number #1 Player</h5>
-                    <p className="card-text">First Player on ATP List is <b>{first[0].fullName}</b> with total of <b>{first[0].points}</b> Points.
+                    <h5 className="card-title text-white">Number #1 Player</h5>
+                    <p className="card-text text-light">First Player on ATP List is <b>{first[0].fullName}</b> with total of <b>{first[0].points}</b> Points.
                     <br />Runner up is <b>{first[1].fullName}</b> with total of <b>{first[1].points}</b> Points.</p>
-                    <a href="#" className="btn btn-primary">View Player</a>
+                    <Link to={"/players/" + first[0].id} style={{ textDecoration: "none" }}>
+                      <a className="btn btn-primary">View Player</a>
+                    </Link>
                   </div>
                 </div>
-                <div data-aos="fade-right" className="card mt-4 mr-sm-2 mr-md-5">
+                <div data-aos="fade-right" className="card bg-carddark rounded-sm mt-4 mr-sm-2 mr-md-5 shadow-lg">
                   <img src="https://i0.wp.com/shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png?resize=1024%2C683&ssl=1" className="card-img-top" alt="..." />
                   <div className="card-body">
-                    <h5 className="card-title">GOAT</h5>
-                    <p className="card-text"><b>{best.name} ({best.country})</b> is the GOAT with total of <b>{best.total_points}</b> points and <b>{best.titles}</b> Titles of which <b>{best.grand_slams}</b> are <u>Grand Slams</u> & <b>{best.masters}</b> are <u>Masters</u>.
+                    <h5 className="card-title text-white">GOAT</h5>
+                    <p className="card-text text-light"><b>{best.name} ({best.country})</b> is the GOAT with total of <b>{best.total_points}</b> points and <b>{best.titles}</b> Titles of which <b>{best.grand_slams}</b> are <u>Grand Slams</u> & <b>{best.masters}</b> are <u>Masters</u>.
                     <br/><b>Won-Lost:</b> {best.won_lost} ({best.won_percent}).</p>
-                    <a href="#" className="btn btn-primary">View Player</a>
+                    <Link to={"/players/" + best.id} style={{ textDecoration: "none" }}>
+                      <a className="btn btn-primary">View Player</a>
+                    </Link>
                   </div>
                 </div>
-                <div data-aos="fade-right" className="card mt-4">
+                <div data-aos="fade-right" className="card bg-carddark rounded-sm mt-4 shadow-lg">
                   <img src="https://i0.wp.com/shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png?resize=1024%2C683&ssl=1" className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <h5 className="card-title">Latest Tournament</h5>
-                    <p className="card-text">Latest tournament is <b>{latestTourney.name}</b> which is of Level <b>{latestTourney.level}</b>.<br />First Favorite of Tournament is <b>{latestTourney.favorite_one}</b> & is played on <b>{latestTourney.surface}</b>.</p>
-                    <a href="#" className="btn btn-primary">View Tournament</a>
+                  <div className="card-body"> 
+                    <h5 className="card-title text-white">Latest Tournament</h5>
+                    <p className="card-text text-light">Latest tournament is <b>{latestTourney.name}</b> which is of Level <b>{latestTourney.level}</b>.<br />First Favorite of Tournament is <b>{latestTourney.favorite_one}</b> & is played on <b>{latestTourney.surface}</b>.</p>
+                    <Link to={"/tournaments/" + latestTourney.id} style={{ textDecoration: "none" }}>
+                      <a className="btn btn-primary">View Tournament</a>
+                    </Link>
                   </div>
                 </div>
               </div>
