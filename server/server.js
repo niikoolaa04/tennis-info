@@ -19,7 +19,7 @@ app.use(cors({
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Origin", process.env.SERVER_CLIENT_URL);
+  // res.header("Access-Control-Allow-Origin", process.env.SERVER_CLIENT_URL);
   next();
 })
 
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res) => { res.send('Hello from Express!') })
 
-app.use("/auth", auth);
+/* app.use("/auth", auth);
 app.use("/api", api);
-app.use("/users", users);
-app.listen(process.env.SERVER_PORT, () => console.log(`Listenting on Port ${process.env.SERVER_PORT}.`));
+app.use("/users", users); */
+app.listen(5000, () => console.log(`Listenting on Port 5000.`));
