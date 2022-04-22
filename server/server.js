@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
   credentials: true,
-  origin: process.env.SERVER_CLIENT_URL
+  // origin: process.env.SERVER_CLIENT_URL
 }));
 
 app.use((req, res, next) => {
@@ -23,10 +23,10 @@ app.use((req, res, next) => {
   next();
 })
 
-mongoose.connect(process.env.SERVER_MONGO_URL, {
-  useNewUrlParser: true,
-}).then(() => console.log(`Successfully Connected to MongoDB.`))
-  .catch((err) => console.log(err));
+// mongoose.connect(process.env.SERVER_MONGO_URL, {
+//   useNewUrlParser: true,
+// }).then(() => console.log(`Successfully Connected to MongoDB.`))
+//   .catch((err) => console.log(err));
 
 app.get('/', (req, res) => { res.send('Hello from Express!') })
 
