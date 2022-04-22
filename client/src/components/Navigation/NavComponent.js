@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-function NavComponent({ active = "home" }) {
-
+function NavComponent({ active }) {
   const isActive = (page) => {
     if(active == page) return " active";
     else return "";
@@ -12,24 +11,34 @@ function NavComponent({ active = "home" }) {
     <div>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className='container'>
-            <a className="navbar-brand" href="#">Navbar</a>
+            <img src="https://cdn-icons-png.flaticon.com/32/802/802289.png" alt="" />
+            <Link to={"/"} className="navbar-brand pl-3">
+              Tennis Info&trade;
+            </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
-
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <a className={"nav-link" + isActive("home")} href="/">Home</a>
+                  <Link to={"/"} className={"nav-link" + isActive("home")}>
+                    <i className="fa-solid fa-house fa-sm pr-2" />Home
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className={"nav-link" + isActive("players")} href="/players">Players</a>
+                  <Link to={"/players"} className={"nav-link" + isActive("players")}>
+                    <i className="fa-solid fa-shirt fa-sm pr-2" />Players
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className={"nav-link" + isActive("tournaments")} href="/tournaments">Tournaments</a>
+                  <Link to={"/tournaments"} className={"nav-link" + isActive("tournaments")}>
+                    <i className="fa-solid fa-building-columns fa-sm pr-2" />Tournaments
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className={"nav-link" + isActive("soon")} href="#">Soon</a>
+                  <Link to={"/"} className={"nav-link" + isActive("soon")}>
+                    <i className="fa-solid fa-question fa-sm pr-2" />Soon
+                  </Link>
                 </li>
               </ul>
               <form className="form-inline my-2 my-lg-0">
