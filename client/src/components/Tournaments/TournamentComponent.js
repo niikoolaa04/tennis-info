@@ -5,6 +5,7 @@ import TournamentList from './TournamentList'
 import SearchComponent from './SearchComponent'
 import AnimationComponent from '../Other/AnimationComponent'
 import { getTournaments } from '../../utils/utils'
+import './style.css'
 
 function TournamentComponent() {
   const [tournaments, setTournaments] = useState([]);
@@ -34,7 +35,7 @@ function TournamentComponent() {
               <div className='mt-5 text-center'>
                 <img className='tennisIcon' src="https://cdn-icons-png.flaticon.com/128/419/419952.png" alt="PlayerInfo" />
                 <p className='text-center display-5 fw-bold text-light'>Tournaments</p>
-                <div className='d-block bg-light rounded mb-0' style={{ margin: "20px auto", width: "16rem", height: "2px" }} />
+                <div className='d-block bg-light rounded mb-0 titleLine' />
               </div>
             </div>
           </div>

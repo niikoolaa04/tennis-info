@@ -1,0 +1,13 @@
+.titleLine {
+  height: 2px;
+  width: 16rem;
+  margin: 20px auto;
+}
+
+@media screen and (max-width: 768px) {
+  .titleLine {
+    height: 2px;
+    width: 12rem;
+    margin: 20px auto;
+  }
+}

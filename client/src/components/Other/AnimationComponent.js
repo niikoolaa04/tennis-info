@@ -12,7 +12,7 @@ function AnimationComponent({ children }) {
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.6 }}
     >
       {children}
     </motion.div>
