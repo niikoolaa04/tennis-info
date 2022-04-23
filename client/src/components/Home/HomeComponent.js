@@ -23,7 +23,7 @@ function HomeComponent() {
       let resp = await res.json();
 
       setLatestTourney({
-        id: resp.rows[0].id,
+        id: resp.rows[0].tournamentId ,
         name: resp.rows[0].name,
         level: getLevel(resp.rows[0].level),
         surface: getSurface(resp.rows[0].surface),
@@ -127,7 +127,7 @@ function HomeComponent() {
                       <h5 className="card-title text-white">Number #1 Player</h5>
                       <p className="card-text text-light">First Player on ATP List is <b>{first[0].fullName}</b> with total of <b>{first[0].points}</b> Points.
                       <br />Runner up is <b>{first[1].fullName}</b> with total of <b>{first[1].points}</b> Points.</p>
-                      <Link to={"/players/104925"} style={{ textDecoration: "none" }}>
+                      <Link to={"/players/" + first[0].id} style={{ textDecoration: "none" }}>
                         <button className="btn btn-primary">View Player</button>
                       </Link>
                     </div>
@@ -138,7 +138,7 @@ function HomeComponent() {
                       <h5 className="card-title text-white">GOAT</h5>
                       <p className="card-text text-light"><b>{best.name} ({best.country})</b> is the GOAT with total of <b>{best.total_points}</b> points and <b>{best.titles}</b> Titles of which <b>{best.grand_slams}</b> are <u>Grand Slams</u> & <b>{best.masters}</b> are <u>Masters</u>.
                       <br/><b>Won-Lost:</b> {best.won_lost} ({best.won_percent}).</p>
-                      <Link to={"/players/" + best.id} style={{ textDecoration: "none" }}>
+                      <Link to={"/players/104925"} style={{ textDecoration: "none" }}>
                         <button className="btn btn-primary">View Player</button>
                       </Link>
                     </div>
