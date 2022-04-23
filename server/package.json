@@ -11,6 +11,7 @@
     "csv-parser": "^3.0.0",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
-    "mongoose": "^6.1.8"
+    "mongoose": "^6.1.8",
+    "node-fetch": "latest"
   }
 }
