@@ -25,4 +25,4 @@ app.use("/api", api);
 // app.use("/auth", auth);
 // app.use("/users", users);
 
-app.listen(process.env.PORT || 5000, () => console.log(`Listenting on Port ${process.env.PORT}.`));
+app.listen(process.env.PORT || 5000, () => console.log(`Listenting on Port ${process.env.PORT || 5000}.`));
