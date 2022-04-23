@@ -37,7 +37,6 @@ function HomeComponent() {
       method: "GET",
     }).then(async(res) => {
       let resp = await res.json();
-      console.log(resp.rows[0])
 
       setBest({
         id: resp.rows[0].playerId,
