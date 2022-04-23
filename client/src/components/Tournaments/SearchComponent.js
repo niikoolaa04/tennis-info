@@ -1,12 +1,11 @@
 import { useState } from 'react'
 
-function SearchComponent({ setTournaments, setLoading, setLevel, setSurface }) {
+function SearchComponent({ setTournaments, setLevel, setSurface }) {
   const [search, setSearch] = useState('');
   const handleSearch = (e) => setSearch(e.target.value);
 
   const searchTournament = async(e) => {
     e.preventDefault();
-    setLoading(true);
     if(search == '') return setTournaments([]);
     await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournaments/search`, {
       method: 'GET',
@@ -16,7 +15,6 @@ function SearchComponent({ setTournaments, setLoading, setLevel, setSurface }) {
     }).then(async(data) => {
       let res = await data.json();
       setTournaments(res)
-      setLoading(false)
     });
   }
 

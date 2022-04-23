@@ -4,10 +4,10 @@ import SearchComponent from './SearchComponent'
 import NavComponent from '../Navigation/NavComponent';
 import AnimationComponent from '../Other/AnimationComponent';
 import FooterComponent from '../Other/FooterComponent';
+import AdComponent from '../Other/AdComponent';
 
 function PlayersComponent() {
   const [players, setPlayers] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [currPage, setCurrPage] = useState(1);
   const prevPage = () => currPage == 1 ? setCurrPage(currPage) : setCurrPage(currPage - 1);
   const nextPage = () => currPage == 100 ? setCurrPage(currPage) : setCurrPage(currPage + 1);
@@ -28,7 +28,7 @@ function PlayersComponent() {
             </div>
           </div>
           {/* SEARCH FOR PLAYER FORM */}
-          <SearchComponent setLoading={setLoading} setPlayers={setPlayers} setCurrPage={setCurrPage} />
+          <SearchComponent setPlayers={setPlayers} setCurrPage={setCurrPage} />
           {/* PLAYER LIST TABLE */}
           <div className='bg-dark mt-5'>
             <div className="container">
@@ -44,7 +44,7 @@ function PlayersComponent() {
                       </tr>
                     </thead>
                     <tbody> 
-                      <PlayerList players={players} loading={loading} setLoading={setLoading} setPlayers={setPlayers} setCurrPage={setCurrPage} currPage={currPage} key={currPage + 1} />
+                      <PlayerList players={players} setPlayers={setPlayers} currPage={currPage} key={currPage + 1} />
                     </tbody>
                   </table>
                 </div>
@@ -72,6 +72,7 @@ function PlayersComponent() {
                 </div>
               </div>
             </div>
+            {/* <AdComponent url={"https://cdn.pixabay.com/photo/2021/09/12/07/58/banner-6617553__340.jpg"} /> */}
           </div>
         </div>
       </AnimationComponent>

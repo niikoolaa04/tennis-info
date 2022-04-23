@@ -9,7 +9,6 @@ import './style.css'
 
 function TournamentComponent() {
   const [tournaments, setTournaments] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [currPage, setCurrPage] = useState(1);
   const [level, setLevel] = useState('');
   const [surface, setSurface] = useState('');
@@ -17,11 +16,11 @@ function TournamentComponent() {
   const nextPage = () => currPage == 100 ? setCurrPage(currPage) : setCurrPage(currPage + 1);
 
   useEffect(async() => {
-    await getTournaments(currPage, 20, setLoading, setTournaments, level, surface);
+    await getTournaments(currPage, 20, setTournaments, level, surface);
   }, [level, surface]);
 
   useEffect(async() => {
-    await getTournaments(currPage, 20, setLoading, setTournaments, level, surface);
+    await getTournaments(currPage, 20, setTournaments, level, surface);
   }, []);
 
   return (
@@ -40,7 +39,7 @@ function TournamentComponent() {
             </div>
           </div>
           {/* SEARCH FOR TOURNAMENT FORM */}
-          <SearchComponent setLoading={setLoading} setTournaments={setTournaments} setLevel={setLevel} setSurface={setSurface} />
+          <SearchComponent setTournaments={setTournaments} setLevel={setLevel} setSurface={setSurface} />
           {/* TOURNAMENT LIST TABLE */}
           <div className="dropdown bg-dark mt-5">
           <div className="container">
@@ -56,7 +55,7 @@ function TournamentComponent() {
                     </tr>
                   </thead>
                   <tbody> 
-                    <TournamentList tournaments={tournaments} loading={loading} setLoading={setLoading} setTournaments={setTournaments} setCurrPage={setCurrPage} currPage={currPage} key={currPage + 1} level={level} />
+                    <TournamentList tournaments={tournaments} setTournaments={setTournaments} currPage={currPage} key={currPage + 1} level={level} />
                   </tbody>
                 </table>
               </div>

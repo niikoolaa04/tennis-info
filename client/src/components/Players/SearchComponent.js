@@ -1,12 +1,11 @@
 import { useState, useRef } from 'react'
 
-function SearchComponent({ setPlayers, setLoading }) {
+function SearchComponent({ setPlayers }) {
   const [search, setSearch] = useState('');
   const handleSearch = (e) => setSearch(e.target.value);
 
   const searchPlayer = async(e) => {
     e.preventDefault();
-    setLoading(true);
     if(search == '') return setPlayers([]);
     await fetch(`${process.env.REACT_APP_SERVER_URL}/api/players/search`, {
       method: 'GET',
@@ -16,7 +15,6 @@ function SearchComponent({ setPlayers, setLoading }) {
     }).then(async(data) => {
       let res = await data.json();
       setPlayers(res)
-      setLoading(false)
     });
   }
 

@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { getTournaments } from '../../utils/utils';
 
-function TournamentList({ tournaments, setTournaments, currPage, setCurrPage, loading, setLoading, level = "" }) {
+function TournamentList({ tournaments, setTournaments, currPage, level = "" }) {
 
   useEffect(async() => {
-    await getTournaments(currPage, 20, setLoading, setTournaments, level);
+    await getTournaments(currPage, 20, setTournaments, level);
   }, []);
 
   return tournaments.map((tour, i) => (

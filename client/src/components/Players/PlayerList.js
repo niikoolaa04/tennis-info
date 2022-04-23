@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { getLeaderboard } from '../../utils/utils';
 
-function PlayerList({ players, setPlayers, currPage, setCurrPage, loading, setLoading }) {
+function PlayerList({ players, setPlayers, currPage }) {
   let limit = 20 * currPage;
 
   useEffect(async() => {
-    await getLeaderboard(limit, setLoading, setPlayers);
+    await getLeaderboard(limit, setPlayers);
   }, []);
 
   return players.map((p, i) => (

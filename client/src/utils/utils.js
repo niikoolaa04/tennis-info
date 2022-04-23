@@ -1,5 +1,4 @@
-export const getLeaderboard = async(limit, setLoading, setPlayers, setFirst) => {
-  setLoading(true);
+export const getLeaderboard = async(limit, setPlayers, setFirst) => {
   await fetch(`${process.env.REACT_APP_SERVER_URL}/api/leaderboard`, {
     method: "GET",
     headers: {
@@ -23,11 +22,10 @@ export const getLeaderboard = async(limit, setLoading, setPlayers, setFirst) => 
     setPlayers(await Promise.all(result));
     let promised = await Promise.all(result);
     if(setFirst) setFirst([promised[0], promised[1]])
-    setLoading(true);
   })
 }
 
-export const getTournaments = async(page, rows, setLoading, setTournaments, level = "", surface = "") => {
+export const getTournaments = async(page, rows, setTournaments, level = "", surface = "") => {
   let data;
   await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournaments`, {
     method: 'GET',
