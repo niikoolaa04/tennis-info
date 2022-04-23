@@ -28,8 +28,6 @@ app.use((req, res, next) => {
 }).then(() => console.log(`Successfully Connected to MongoDB.`))
   .catch((err) => console.log(err));
 
-app.get('/', (req, res) => { res.send('Hello from Express!') })
-
 app.use("/auth", auth);
 app.use("/api", api);
 app.use("/users", users);
