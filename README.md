@@ -1,7 +1,6 @@
 # Tennis Info
 
 Tennis-Info is Web App which gives you ability to view list of ATP Tournaments, Players, get info on Player/Tourney and more stuff.
-
 Website is built with React, Express, Bootstrap & data is saved in MongoDB (Mongoose).
 
 ✨ **Live Demo:** https://celebrated-lily-956265.netlify.app/
@@ -10,7 +9,7 @@ Website is built with React, Express, Bootstrap & data is saved in MongoDB (Mong
 ### Server Installation
 1. Run `npm install` command in server directory
 2. Make `.env` file in server directory and fill as so:  
-2.1 `SERVER_MONGO_URL=<your mongodb url>`  
+2.1 `SERVER_MONGO_URL=<MongoDB URL>`  
 2.2 `SERVER_CLIENT_URL=<URL of your frontend/client>`  
 2.3 `PORT=<Whatever Port you want>`
 
