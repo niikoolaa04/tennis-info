@@ -103,7 +103,7 @@ function TourneyInfoComponent() {
                   </table>
                 </div>
                 <div className='mt-2 mb-4'>
-                  <Link to="/players">
+                  <Link to="/tournaments">
                     <button className='btn btn-primary'>Return to List</button>
                   </Link>
                 </div>
