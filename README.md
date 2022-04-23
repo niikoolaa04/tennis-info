@@ -9,14 +9,14 @@ Website is built with React, Express, Bootstrap & data is saved in MongoDB (Mong
 ## Setup of Backend & Frontend
 ### Server Installation
 1. Run `npm install` command in server directory
-2. Make `.env` file in server directory and fill as so:
-2.1 `SERVER_MONGO_URL=<your mongodb url>`
-2.2 `SERVER_CLIENT_URL=<URL of your frontend/client>`
+2. Make `.env` file in server directory and fill as so:  
+2.1 `SERVER_MONGO_URL=<your mongodb url>`  
+2.2 `SERVER_CLIENT_URL=<URL of your frontend/client>`  
 2.3 `PORT=<Whatever Port you want>`
 
 ### Client Installation
 1. Run `npm install` command in client directory
-2. Make `.env` file in client directory and fill as so:
+2. Make `.env` file in client directory and fill as so:  
 2.1 `REACT_APP_SERVER_URL=<URL of your backend/server>`
 
 ## Other Information (Credits & Info)
