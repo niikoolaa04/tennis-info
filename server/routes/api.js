@@ -79,7 +79,7 @@ router.get("/players/search", async(req, res) => {
     })
   }
   PlayersSchema.aggregate([
-    {$project: { "id": "$id", "hand": "$hand", "rank": "$rank", "points": "$points", "dob": "$dob", "country": "$country", "fullName" : { $concat : [ "$firstName", " ", "$lastName" ] } }},
+    {$project: { "id": "$id", "hand": "$hand", "rank": "$rank", "points": "$points", "dob": "$dob", "country": "$countryCode", "fullName" : { $concat : [ "$firstName", " ", "$lastName" ] } }},
     {$match: {"fullName": {$regex: query, $options:'i'}}} ]).exec(async function(err, result) {
 
     result = await Promise.all(result);

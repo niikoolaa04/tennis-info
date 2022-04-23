@@ -23,6 +23,7 @@ function TourneyInfoComponent() {
       setTourney(data);
       setLoading(false);
     }).catch((err) => {
+      console.log(err)
       navigate("/tournaments");
     });
   }, [])
@@ -72,7 +73,7 @@ function TourneyInfoComponent() {
                       <tr>
                         <th>Winner</th>
                         <td>
-                          <Link className='text-lightaqua' to={"/players/" + tourney[0].runnerUp_id} style={{ textDecoration: "none" }}>
+                          <Link className='text-lightaqua' to={"/players/" + tourney[0].winner_id} style={{ textDecoration: "none" }}>
                             { tourney[0].winner } ({ tourney[0].winner_loc })
                           </Link>
                         </td>
@@ -80,7 +81,7 @@ function TourneyInfoComponent() {
                       <tr>
                         <th>Loser</th>
                         <td>
-                          <Link className='text-lightaqua' to={"/players/" + tourney[0].winner_id} style={{ textDecoration: "none" }}>
+                          <Link className='text-lightaqua' to={"/players/" + tourney[0].runnerUp_id} style={{ textDecoration: "none" }}>
                             { tourney[0].runnerUp }
                           </Link>
                         </td>

@@ -10,7 +10,6 @@ app.use(cors({
   origin: process.env.SERVER_CLIENT_URL
 }));
 
-app.use(cookieParser());
 app.use(express.json());
 
 mongoose.connect(process.env.SERVER_MONGO_URL, {

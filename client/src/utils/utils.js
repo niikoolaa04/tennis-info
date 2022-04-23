@@ -92,14 +92,34 @@ export const getSurface = (surface) => {
   return format;
 }
 
+export const getPlayerFromName = async(name) => {
+  let player;
+  await fetch(`${process.env.REACT_APP_SERVER_URL}/api/players/search`, {
+    method: 'GET',
+    headers: {
+      search: name,
+    }
+  }).then(async(data) => {
+    let res = await data.json();
+    player = res;
+    if(res.length == 0) player = [{
+      fullName: "N/A",
+      country: "N/A",
+      id: "0"
+    }]
+  });
+  return player
+}
+
 export const findTournament = async(id, setTourney) => {
   let data;
   await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournament/` + id, {
     method: 'GET'
   }).then(async(tour) => {
     let res = await tour.json();
-
-    let formatData = res.rows.map((x) => {
+    let formatData = res.rows.map(async(x) => {
+      let winner = await getPlayerFromName(x.winner.name);
+      let runnerUp = await getPlayerFromName(x.runnerUp.name.split(" ").length == 3 ? x.runnerUp.name.split(" ")[0] + " " + x.runnerUp.name.split(" ")[2] : x.runnerUp.name);
       let level = getLevel(x.level);
 
       let surface = getSurface(x.surface)
@@ -126,16 +146,17 @@ export const findTournament = async(id, setTourney) => {
         surfaceColor,
         drawSize: x.drawSize,
         score: x.score,
-        runnerUp: `${x.runnerUp.name} (${x.runnerUp.country.id})`,
-        runnerUp_id: x.runnerUp.id,
+        runnerUp: `${runnerUp[0].fullName} (${runnerUp[0].country.toUpperCase()})`,
+        runnerUp_id: runnerUp[0].id,
         season: x.season,
-        winner: x.winner.name,
-        winner_id: x.winner.id,
-        winner_loc: x.winner.country.code.toUpperCase(),
+        winner: winner[0].fullName,
+        winner_id: winner[0].id,
+        winner_loc: winner[0].country.toUpperCase(),
       };
     });
 
-    return data = formatData;
+    return data = await Promise.all(formatData);
   });
+  console.log(data)
   return data;
 }

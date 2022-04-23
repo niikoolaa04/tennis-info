@@ -1,0 +1,1 @@
+Add Loading Component - Needed for Tournaments because they load slow
