@@ -1,24 +1,16 @@
 const router = require("express").Router();
 const PlayersSchema = require("../models/Players");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const fetch = require("node-fetch")
-const { getRank } = require("../utils/utils");
-
-router.use(cors({
-  credentials: true,
-  origin: process.env.SERVER_CLIENT_URL
-}))
-
-router.use(cookieParser());
+const fetch = require("node-fetch");
 
 router.get("/leaderboard", async(req, res) => {
+  if(req.headers.origin != process.env.SERVER_CLIENT_URL) return res.sendStatus(401);
   PlayersSchema.find({ }, null, { sort: { rank: 1 } }, (err, post) => {
     res.json(post).status(200);
   }).limit(req.headers.limit)
 });
 
 router.get("/tournaments", async(req, res) => {
+  if(req.headers.origin != process.env.SERVER_CLIENT_URL) return res.sendStatus(401);
   await fetch(`https://www.ultimatetennisstatistics.com/tournamentsTable?current=${req.headers.page}&rowCount=20&searchPhrase=&fromSeason=2017&toSeason=&level=${req.headers.level}&surface=${req.headers.surface}&indoor=&speed=&_=1648313910758`).then(async(data) => {
     let result = await data.json();
     res.json(result).status(200);
@@ -26,6 +18,7 @@ router.get("/tournaments", async(req, res) => {
 });
 
 router.get("/tournaments/search", async(req, res) => {
+  if(req.headers.origin != process.env.SERVER_CLIENT_URL) return res.sendStatus(401);
   await fetch(`https://www.ultimatetennisstatistics.com/tournamentsTable?current=1&rowCount=500&searchPhrase=&fromSeason=&toSeason=&level=&surface=&indoor=&speed=&_=1648313910758`).then(async(data) => {
     let result = await data.json();
     let tournament = result.rows.filter((x) => x.name.toLowerCase().includes(req.headers.search.toLowerCase()));
@@ -60,6 +53,7 @@ router.get("/tournaments/search", async(req, res) => {
 })
 
 router.get("/tournament/latest", async(req, res) => {
+  if(req.headers.origin != process.env.SERVER_CLIENT_URL) return res.sendStatus(401);
   await fetch(`https://www.ultimatetennisstatistics.com/inProgressEventsTable?current=1&rowCount=-1&searchPhrase=&_=1650103550630`).then(async(data) => {
     let result = await data.json();
     res.json(result).status(200);
@@ -67,6 +61,7 @@ router.get("/tournament/latest", async(req, res) => {
 })
 
 router.get("/tournament/:id", async(req, res) => {
+  if(req.headers.origin != process.env.SERVER_CLIENT_URL) return res.sendStatus(401);
   await fetch(`https://www.ultimatetennisstatistics.com/tournamentEventsTable?tournamentId=${req.params.id}&current=1&rowCount=15&sort%5Bdate%5D=desc&searchPhrase=`).then(async(data) => {
     let result = await data.json();
     res.json(result).status(200);
@@ -74,6 +69,7 @@ router.get("/tournament/:id", async(req, res) => {
 });
 
 router.get("/players/search", async(req, res) => {
+  if(req.headers.origin != process.env.SERVER_CLIENT_URL) return res.sendStatus(401);
   let query = req.headers.search;
   if(query == '') {
     PlayersSchema.find({ }, function (err, post) {
@@ -93,6 +89,7 @@ router.get("/players/search", async(req, res) => {
 });
 
 router.get("/players/goat", async(req, res) => {
+  if(req.headers.origin != process.env.SERVER_CLIENT_URL) return res.sendStatus(401);
   await fetch(`https://www.ultimatetennisstatistics.com/goatListTable?current=1&rowCount=3&sort%5BtotalPoints%5D=desc&searchPhrase=&oldLegends=true`).then(async(data) => {
     let result = await data.json();
     res.json(result).status(200);
@@ -100,40 +97,17 @@ router.get("/players/goat", async(req, res) => {
 })
 
 router.get("/players/:id", async(req, res) => {
+  if(req.headers.origin != process.env.SERVER_CLIENT_URL) return res.sendStatus(401);
   PlayersSchema.find({ id: parseInt(req.params.id) }, (err, post) => {
     res.json(post).status(200);
   });
 });
 
 router.get("/players", async(req, res) => {
+  if(req.headers.origin != process.env.SERVER_CLIENT_URL) return res.sendStatus(401);
   PlayersSchema.find({}, (err, post) => {
     res.json(post).status(200);
   });
 });
-
-
-/* router.get("/list", async(req, res) => {
-  UserSchema.find({}, "id firstName lastName username email profilePicture", (err, post) => {
-    res.json(post).status(200);
-  })
-});
-
-router.get("/:id", async(req, res) => {
-  let exist = await UserSchema.exists({ id: req.params.id });
-  if(!exist) return res.json({
-    status: 404
-  }).status(404);
-  let userData = await UserSchema.findOne({ id: req.params.id });
-  
-  res.json(userData).status(200);
-});
-
-router.put("/:id", async(req, res) => {
-  UserSchema.findOneAndUpdate({ id: req.params.id }, req.body, { new: true }, async(err, post) => {
-    if(err) console.log(err)
-    console.log('posted')
-    res.json(post).status(200);
-  });
-}); */
 
 module.exports = router;

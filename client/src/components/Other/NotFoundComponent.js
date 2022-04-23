@@ -13,7 +13,7 @@ function NotFoundComponent() {
             <img className='m-0 p-0' style={{ transform: "scale(1)" }} src="https://cdn-icons-png.flaticon.com/256/5058/5058040.png" alt="" />
             <p className="text-light fs-3 pt-5 pb-2">Page requested couldn't be found.</p>
             <Link to={"/"}>
-              <button type="button" class="btn btn-primary btn-lg">Return Home</button>
+              <button type="button" className="btn btn-primary btn-lg">Return Home</button>
             </Link>
           </div>
         </div>

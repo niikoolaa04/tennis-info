@@ -28,7 +28,7 @@ function PlayersComponent() {
             </div>
           </div>
           {/* SEARCH FOR PLAYER FORM */}
-          <SearchComponent loading={loading} setLoading={setLoading} players={players} setPlayers={setPlayers} setCurrPage={setCurrPage} />
+          <SearchComponent setLoading={setLoading} setPlayers={setPlayers} setCurrPage={setCurrPage} />
           {/* PLAYER LIST TABLE */}
           <div className='bg-dark mt-5'>
             <div className="container">

@@ -10,7 +10,7 @@ function TournamentList({ tournaments, setTournaments, currPage, setCurrPage, lo
   }, []);
 
   return tournaments.map((tour, i) => (
-    <tr>
+    <tr key={tour.id}>
       <td scope="row">
         <Link to={"/tournaments/" + tour.id} className="text-lightaqua" style={{ textDecoration: "none" }}>
           { tour.name }

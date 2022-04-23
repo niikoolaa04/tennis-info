@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react'
-import { getPlayerFromId } from '../../utils/utils'
 
-function SearchComponent({ players, setPlayers, loading, setLoading }) {
+function SearchComponent({ setPlayers, setLoading }) {
   const [search, setSearch] = useState('');
   const handleSearch = (e) => setSearch(e.target.value);
 
@@ -26,9 +25,9 @@ function SearchComponent({ players, setPlayers, loading, setLoading }) {
       <div className="container">
         <div className="row">
           <div className="mt-4 d-flex justify-content-center">
-            <form class="form-inline my-2 my-lg-0" onSubmit={(async(e) => await searchPlayer(e))}>
-              <input class="form-control mr-sm-2" type="search" placeholder="Search for Player" aria-label="Search" onChange={((e) => handleSearch(e))} />
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={(async(e) => await searchPlayer(e))}>Search</button>
+            <form className="form-inline my-2 my-lg-0" onSubmit={(async(e) => await searchPlayer(e))}>
+              <input className="form-control mr-sm-2" type="search" placeholder="Search for Player" aria-label="Search" onChange={((e) => handleSearch(e))} />
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={(async(e) => await searchPlayer(e))}>Search</button>
             </form>
           </div>
         </div>

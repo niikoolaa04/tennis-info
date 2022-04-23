@@ -40,9 +40,9 @@ function TournamentComponent() {
             </div>
           </div>
           {/* SEARCH FOR TOURNAMENT FORM */}
-          <SearchComponent loading={loading} setLoading={setLoading} setTournaments={setTournaments} setLevel={setLevel} setSurface={setSurface} />
+          <SearchComponent setLoading={setLoading} setTournaments={setTournaments} setLevel={setLevel} setSurface={setSurface} />
           {/* TOURNAMENT LIST TABLE */}
-          <div class="dropdown bg-dark mt-5">
+          <div className="dropdown bg-dark mt-5">
           <div className="container">
             <div className="row">
               <div className="mt-5">

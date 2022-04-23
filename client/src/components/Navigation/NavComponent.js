@@ -9,7 +9,7 @@ function NavComponent({ active }) {
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className='container'>
           <Link to={"/"} className="navbar-brand titleIcon ">
             <img className='align-middle' src="https://cdn-icons-png.flaticon.com/32/802/802289.png" alt="" />
@@ -42,11 +42,11 @@ function NavComponent({ active }) {
               </li>
             </ul>
             {/* <form className="form-inline my-2 my-lg-0">
-              <div class="input-group mr-sm-2">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Player</span>
+              <div className="input-group mr-sm-2">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">Player</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Search for Player" aria-label="Player" aria-describedby="basic-addon1" />
+                <input type="text" className="form-control" placeholder="Search for Player" aria-label="Player" aria-describedby="basic-addon1" />
               </div>
               <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form> */}

@@ -100,7 +100,7 @@ function PlayerInfoComponent() {
                 </div>
                 <div className='mt-2 mb-4'>
                   <Link to="/players">
-                    <a className='btn btn-primary'>Return to List</a>
+                    <button className='btn btn-primary'>Return to List</button>
                   </Link>
                 </div>
               </div>

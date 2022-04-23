@@ -10,7 +10,7 @@ function PlayerList({ players, setPlayers, currPage, setCurrPage, loading, setLo
   }, []);
 
   return players.map((p, i) => (
-    <tr>
+    <tr key={p.id}>
       <th scope="row">{ p.rank }</th>
       <td>
         <Link className='text-lightaqua' to={"/players/" + p.id} style={{ textDecoration: "none" }}>
