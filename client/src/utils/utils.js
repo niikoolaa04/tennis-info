@@ -1,4 +1,4 @@
-export const getLeaderboard = async(limit, setPlayers, setFirst) => {
+export const getLeaderboard = async(limit, setPlayers, setFirst = null, setLoading = () => {}) => {
   await fetch(`${process.env.REACT_APP_SERVER_URL}/api/leaderboard`, {
     method: "GET",
     headers: {
@@ -18,10 +18,10 @@ export const getLeaderboard = async(limit, setPlayers, setFirst) => {
       return obj;
     });
 
-
+    setLoading(false)
     setPlayers(await Promise.all(result));
     let promised = await Promise.all(result);
-    if(setFirst) setFirst([promised[0], promised[1]])
+    if(setFirst) setFirst([promised[0], promised[1]]);
   })
 }
 

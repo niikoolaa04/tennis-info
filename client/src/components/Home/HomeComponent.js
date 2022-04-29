@@ -16,7 +16,7 @@ function HomeComponent() {
   const limit = 10;
   
   useEffect(async() => {
-    await getLeaderboard(limit, setLoading, setPlayers, setFirst);
+    await getLeaderboard(limit, setPlayers, setFirst);
     await fetch(`${process.env.REACT_APP_SERVER_URL}/api/tournament/latest`, {
       method: "GET",
     }).then(async(res) => {
