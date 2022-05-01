@@ -4,7 +4,6 @@ import SearchComponent from './SearchComponent'
 import NavComponent from '../Navigation/NavComponent';
 import AnimationComponent from '../Other/AnimationComponent';
 import FooterComponent from '../Other/FooterComponent';
-import AdComponent from '../Other/AdComponent';
 
 function PlayersComponent() {
   const [players, setPlayers] = useState([]);
@@ -72,7 +71,6 @@ function PlayersComponent() {
                 </div>
               </div>
             </div>
-            {/* <AdComponent url={"https://cdn.pixabay.com/photo/2021/09/12/07/58/banner-6617553__340.jpg"} /> */}
           </div>
         </div>
       </AnimationComponent>
