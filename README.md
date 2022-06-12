@@ -3,7 +3,7 @@
 Tennis-Info is Web App which gives you ability to view list of ATP Tournaments, Players, get information on Player/Tourney and more stuff.
 Website is built with React, Express, Bootstrap & data is saved in MongoDB (Mongoose).
 
-✨ **Live Demo:** https://celebrated-lily-956265.netlify.app/
+✨ **Live Demo:** https://tennis-info.vercel.app/
 
 ## Setup of Backend & Frontend
 ### Server Installation
