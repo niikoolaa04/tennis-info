@@ -109,3 +109,5 @@ dist
 
 *.rest
 olddata/
+server/.deta/state
+server/.deta/prog_info
