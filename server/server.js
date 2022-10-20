@@ -20,3 +20,5 @@ mongoose.connect(process.env.SERVER_MONGO_URL, {
 app.use("/api", api);
 
 app.listen(process.env.PORT || 5000, () => console.log(`Listenting on Port ${process.env.PORT || 5000}.`));
+
+module.exports = app;

@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "tennisinfo-backend",
   "version": "0.2.0",
   "private": true,
   "main": "server.js",
@@ -15,6 +15,6 @@
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "mongoose": "^6.1.8",
-    "node-fetch": "latest"
+    "node-fetch": "^2.6.1"
   }
 }
